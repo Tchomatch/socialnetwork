@@ -10,7 +10,20 @@
 </head>
     {% block header %}
     <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-        
+        <a class="navbar-brand" href="#">aUz</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/register">Inscription</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/login">Connexion</a>
+                </li>
+            </ul>
+        </div>
     </nav>
     {% endblock %}
 
@@ -19,8 +32,8 @@
     {% block javascripts %}
     <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-	<script type="text/javascript" src="/javascript/fontawesome/fontawesome.js"></script>
-    <script type="text/javascript" src="/javascript/bootstrap/bootstrap.min.js"></script>
+	<script type="text/javascript" src="/js/fontawesome/fontawesome.js"></script>
+    <script type="text/javascript" src="/js/bootstrap/bootstrap.min.js"></script>
     {% endblock %}
 </body>
 </html>
