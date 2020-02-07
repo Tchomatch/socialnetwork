@@ -19,6 +19,9 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 class ChatController extends AbstractController
 {
+    # A prevoir une autre route "/conversation/{<id de la conversation recherchée>}"
+    # A prevoir un écran conversations
+
     /**
      * @Route("/profile/{id}/chat", name="chat")
      */
@@ -28,7 +31,6 @@ class ChatController extends AbstractController
         $userSender =  $userRepository->find(4); // $this->getUser()
         $userSenderId = $userSender->getId();
         $conversation = $conversationRepository->findConv($id, $userSenderId);
-        $msg = $messageRepository->findAll();
 
         $message = new Message();
 
@@ -62,13 +64,13 @@ class ChatController extends AbstractController
             $entityManager->persist($message);
         
             $files = $form->get('image')->getData();
-            dump($this->getParameter('images_original'));
+           
             if ($files) {
                 
                 // Move the file to the directory where brochures are stored
                 foreach ($files as $file){
                     $newFilename ='img_' . uniqid().'.'.$file->guessExtension();
-                    dump($file);
+                   
                     try {
                         $file->move(
                             $this->getParameter('images_original'),
@@ -124,13 +126,18 @@ class ChatController extends AbstractController
                 $entityManager->flush();
             }
             
+           
 
             //return $this->redirectToRoute('chat', ['id' => $userReceiver->getId()]);
-        }
+        } 
+        $msg = $conversation->getMessages();
+        
         return $this->render('chat/index.html.twig', [
             'formMessage' => $form->createView(),
             'messages' => $msg,
-            'userReceiver' => $userReceiver
+            'userReceiver' => $userReceiver,
+            
+            
         ]);
     }
 }

@@ -5,10 +5,12 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
  */
 class User implements UserInterface
 {
@@ -46,6 +48,16 @@ class User implements UserInterface
     private $image;
 
     /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Information", mappedBy="user", cascade={"persist", "remove"})
+     */
+    private $information;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Post", mappedBy="user")
+     */
+    private $posts;
+
+    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Message", mappedBy="userReceiver")
      */
     private $messages;
@@ -65,6 +77,7 @@ class User implements UserInterface
         $this->messages = new ArrayCollection();
         $this->messageSender = new ArrayCollection();
         $this->conversations = new ArrayCollection();
+        $this->posts = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -200,6 +213,23 @@ class User implements UserInterface
         return $this;
     }
 
+    public function getInformation(): ?Information
+    {
+        return $this->information;
+    }
+
+    public function setInformation(Information $information): self
+    {
+        $this->information = $information;
+
+        // set the owning side of the relation if necessary
+        if ($information->getUser() !== $this) {
+            $information->setUser($this);
+        }
+
+        return $this;
+    }
+
     /**
      * @return Collection|Message[]
      */
@@ -218,6 +248,24 @@ class User implements UserInterface
         return $this;
     }
 
+    /**
+     * @return Collection|Post[]
+     */
+    public function getPosts(): Collection
+    {
+        return $this->posts;
+    }
+
+    public function addPost(Post $post): self
+    {
+        if (!$this->posts->contains($post)) {
+            $this->posts[] = $post;
+            $post->setUser($this);
+        }
+
+        return $this;
+    }
+
     public function removeMessageSender(Message $messageSender): self
     {
         if ($this->messageSender->contains($messageSender)) {
@@ -225,6 +273,19 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($messageSender->getUserSender() === $this) {
                 $messageSender->setUserSender(null);
+            }
+        }
+
+        return $this;
+    }
+    
+    public function removePost(Post $post): self
+    {
+        if ($this->posts->contains($post)) {
+            $this->posts->removeElement($post);
+            // set the owning side to null (unless already changed)
+            if ($post->getUser() === $this) {
+                $post->setUser(null);
             }
         }
 

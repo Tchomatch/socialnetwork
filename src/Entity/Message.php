@@ -20,7 +20,7 @@ class Message
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=350, nullable=true)
+     * @ORM\Column(type="text", length=350, nullable=true)
      */
     private $contenu;
 

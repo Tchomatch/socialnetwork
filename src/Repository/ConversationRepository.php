@@ -26,12 +26,12 @@ class ConversationRepository extends ServiceEntityRepository
     public function findConv($id, $userSenderId)
     {
         return $this->createQueryBuilder('conversation')
-            ->andWhere('conversation.userReceiver = :user_receiver_id', 'conversation.userSender = :user_sender_id')
+            ->andWhere('conversation.userReceiver = :user_receiver_id and conversation.userSender = :user_sender_id or conversation.userReceiver = :user_sender_id and conversation.userSender = :user_receiver_id')
             ->setParameters([
                 'user_receiver_id'=> $id,
                 'user_sender_id' => $userSenderId])
             ->getQuery()
-            ->getOneOrNullResult() // pour récupérer une seul cinversation
+            ->getOneOrNullResult() // pour récupérer une seul conversation
         ;
     }
     

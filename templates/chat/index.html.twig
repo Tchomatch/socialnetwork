@@ -3,36 +3,63 @@
 {% block title %}Hello ChatController!{% endblock %}
          
 {% block body %}
-
-    {% for message in messages %}
-        {% if userReceiver.id == message.userSender.id %}
-            <div class="row mb-3">
-                <div class="col-6 offset-6 msgSend">
-                    <img class="imageUser" src="{{message.userReceiver.image}}" alt="">
-                    <h6>{{message.userReceiver.pseudo}}</h6>
-                    <h4>{{message.contenu}}</h4>
-                    {% for image in message.imageChats %}
-                    
-                        <img class="imageChat" src="{{asset('uploads/image/' ~ image.image)}}" alt="">
-                    {% endfor %}
-                    <p>envoyer le : {{message.dateEnvoi|date('d/m/Y H:i:s')}}</p>
+   
+    <div class="container chat "> 
+        <div class="row headerChat mb-5">
+            <img class="imageUserHeader ml-1" src="{{userReceiver.image}}" alt="">
+            <h4 class="ml-3">{{userReceiver.pseudo}}</h4>
+        </div>
+        {% for message in messages %}
+            
+               
+            {% if userReceiver.id == message.userReceiver.id %}
+                <div class="row mb-3">
+                    <div class="col-5 offset-6 msgSend">
+                        <div class="row">
+                            <img class="imageUserChat ml-1" src="{{message.userReceiver.image}}" alt="">
+                            <h6 class="ml-1">{{message.userReceiver.pseudo}}</h6>
+                        </div>
+                        <h4>{{message.contenu}}</h4>
+                        {% for image in message.imageChats %}
+                        
+                            <img class="imageChat" src="{{asset('uploads/image/' ~ image.image)}}" alt="">
+                        {% endfor %} <br>
+                        <small>envoyer le : {{message.dateEnvoi|date('d/m/Y H:i:s')}}</small>
+                    </div>
                 </div>
-            </div>
-        {% else %}
-            <div class="row mb-3">
-                <div class="col-6 msgRec">
-                    <img class="imageUser" src="{{message.userSender.image}}" alt="">
-                    <h6>{{message.userSender.pseudo}}</h6>
-                    <h4>{{message.contenu}}</h4>
-                    {% for image in message.imageChats %}
-                    
-                        <img class="imageChat" src="{{asset('uploads/image/' ~ image.image)}}" alt="">
-                    {% endfor %}
-                    <p>envoyer le : {{message.dateEnvoi|date('d/m/Y H:i:s')}}</p>
+            {% else %}
+                <div class="row mb-3">
+                    <div class="col-5 offset-1 msgRec">
+                        <div class="row">
+                            <img class="imageUserChat ml-1" src="{{message.userSender.image}}" alt="">
+                            <h6 class="ml-1">{{message.userSender.pseudo}}</h6>
+                        </div>
+                        
+                        <h4>{{message.contenu}}</h4>
+                        {% for image in message.imageChats %}
+                        
+                            <img class="imageChat" src="{{asset('uploads/image/' ~ image.image)}}" alt="">
+                        {% endfor %} <br>
+                        <small>envoyer le : {{message.dateEnvoi|date('d/m/Y H:i:s')}}</small>
+                    </div>
                 </div>
+            {% endif %}
+                
+            
+        {% endfor %}
+        {{ form_start(formMessage)}}
+            <div class="row">
+                <div class="col-8">
+                    {{form_row(formMessage.contenu)}}
+                </div>
+                  <div class="col-4">
+                    {{form_row(formMessage.image)}}
+                </div>
+                
             </div>
-        {% endif %}
-    {% endfor %}
+        {{ form_end(formMessage)}}
 
-    {{form(formMessage)}}
+    </div>
+
+    <script src="/js/chat.js"></script>
 {% endblock %}
