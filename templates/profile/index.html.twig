@@ -17,8 +17,12 @@
                 {{ user.pseudo }}</p>
             </div>
 
-            {% if user.information is defined %}
-                <div class="col-3 border-right">
+            <div class="col-4">
+                <img style="width:200px;height:200px;" src="{{ asset('uploads/image/' ~ user.image ) }}" alt="Image user's">
+            </div>
+
+             {% if user.information %}
+                <div class="col-3 border-left">
                     <p>{{ user.information.nom }}<br>
                     {{ user.information.prenom }}<br>
                     {{ user.information.dateNaissance|date("Y-m-d") }}<br>
@@ -28,10 +32,6 @@
                     {{ user.information.description }}</p>
                 </div>
             {% endif %}
-
-            <div class="col-4">
-                <img style="width:200px;hieght:200px;" src="{{ user.image }}" alt="Image user's">
-            </div>
         
         </div> 
         
@@ -43,4 +43,31 @@
         {{ form(addPost) }}
 
     </div>
+
+    {% if affichagePosts %}
+
+        <div class="container border">
+
+            <div class="row p-3">
+                <img class="pr-2" style="width:50px;height:50px;" src="{{ asset('uploads/image/' ~ user.image ) }}" alt="Image user's">
+                <p>{{ user.pseudo }}</p> 
+            </div>
+            
+            {% for affichagePost in affichagePosts %}
+                
+                {% for image in affichagePost.imagePost %}
+
+                    <img style="width:100px;height:100px;" src="{{ asset('uploads/image/' ~ image.image ) }}" alt="">
+                
+                {% endfor %}
+
+                <p>{{ affichagePost.contenu }}</p>
+                <small>{{ affichagePost.datepost|date("d-m-Y H-i-s") }}</small>
+
+            {% endfor %}
+
+        </div>
+
+    {% endif %}
+
 {% endblock %}
