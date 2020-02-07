@@ -10,7 +10,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
- * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
+ * @UniqueEntity(fields={"email"}, message="Il existe déjà un compte avec cet email.")
+ * @UniqueEntity(fields={"pseudo"}, message="Il existe déjà un compte avec ce pseudo.")
  */
 class User implements UserInterface
 {
@@ -51,6 +52,16 @@ class User implements UserInterface
      * @ORM\OneToOne(targetEntity="App\Entity\Information", mappedBy="user", cascade={"persist", "remove"})
      */
     private $information;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Post", mappedBy="User")
+     */
+    private $posts;
+
+    public function __construct()
+    {
+        $this->posts = new ArrayCollection();
+    }
 
 
     public function getId(): ?int
@@ -167,6 +178,37 @@ class User implements UserInterface
         // set the owning side of the relation if necessary
         if ($information->getUser() !== $this) {
             $information->setUser($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Post[]
+     */
+    public function getPosts(): Collection
+    {
+        return $this->posts;
+    }
+
+    public function addPost(Post $post): self
+    {
+        if (!$this->posts->contains($post)) {
+            $this->posts[] = $post;
+            $post->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removePost(Post $post): self
+    {
+        if ($this->posts->contains($post)) {
+            $this->posts->removeElement($post);
+            // set the owning side to null (unless already changed)
+            if ($post->getUser() === $this) {
+                $post->setUser(null);
+            }
         }
 
         return $this;

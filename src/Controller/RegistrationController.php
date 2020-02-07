@@ -28,6 +28,7 @@ class RegistrationController extends AbstractController
 
             $file = $form->get('image')->getData();
 
+
             if ($file) {
                 
                 // Move the file to the directory where brochures are stored
@@ -43,6 +44,8 @@ class RegistrationController extends AbstractController
                 }                // updates the 'brochureFilename' property to store the jpg file name
                 // instead of its contents
                 $user->setImage($newFilename);
+            } else {
+                $user->setImage("default.png");
             }
             // encode the plain password
             $user->setPassword(
@@ -51,6 +54,7 @@ class RegistrationController extends AbstractController
                     $form->get('plainPassword')->getData()
                 )
             );
+            
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
@@ -58,14 +62,14 @@ class RegistrationController extends AbstractController
 
             // do anything else you need here, like send an email
 
-            // return $guardHandler->authenticateUserAndHandleSuccess(
-            //     $user,
-            //     $request,
-            //     $authenticator,
-            //     'main' // firewall name in security.yaml
-            // );
+            return $guardHandler->authenticateUserAndHandleSuccess(
+                $user,
+                $request,
+                $authenticator,
+                'main' // firewall name in security.yaml
+            );
 
-            return $this->redirectToRoute('app_login');
+            return $this->redirectToRoute('home');
         }
 
         return $this->render('registration/register.html.twig', [
