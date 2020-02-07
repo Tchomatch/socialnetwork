@@ -27,7 +27,6 @@ class ProfileController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid()){
 
-            $user = $this->getUser();
             $date = new \DateTime();
 
             $post->setDatepost($date);
