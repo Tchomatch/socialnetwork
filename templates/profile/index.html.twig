@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profile{% endblock %}
+
+{% block body %}
+
+    <div class="d-flex justify-content-center mb-3">
+        <h1>Profile page</h1>
+    </div>
+
+    <div class="container">
+       
+        <div class="row">
+
+            <div class="col-4 border-right">
+                <p>{{ user.email }}<br>
+                {{ user.pseudo }}</p>
+            </div>
+
+            {% if user.information is defined %}
+                <div class="col-3 border-right">
+                    <p>{{ user.information.nom }}<br>
+                    {{ user.information.prenom }}<br>
+                    {{ user.information.dateNaissance|date("Y-m-d") }}<br>
+                    {{ user.information.adresse }}<br>
+                    {{ user.information.ville }}<br>
+                    {{ user.information.cp }}<br>
+                    {{ user.information.description }}</p>
+                </div>
+            {% endif %}
+
+            <div class="col-4">
+                <img style="width:200px;hieght:200px;" src="{{ user.image }}" alt="Image user's">
+            </div>
+        
+        </div> 
+        
+    </div>
+    
+    <div class="container">
+        <button class="btn btn-success">+</button>
+
+        {{ form(addPost) }}
+
+    </div>
+{% endblock %}
