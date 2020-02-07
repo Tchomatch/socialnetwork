@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -31,6 +33,16 @@ class Post
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ImagePost", mappedBy="post")
+     */
+    private $image;
+
+    public function __construct()
+    {
+        $this->image = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -69,6 +81,37 @@ class Post
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ImagePost[]
+     */
+    public function getImage(): Collection
+    {
+        return $this->image;
+    }
+
+    public function addImage(ImagePost $image): self
+    {
+        if (!$this->image->contains($image)) {
+            $this->image[] = $image;
+            $image->setPost($this);
+        }
+
+        return $this;
+    }
+
+    public function removeImage(ImagePost $image): self
+    {
+        if ($this->image->contains($image)) {
+            $this->image->removeElement($image);
+            // set the owning side to null (unless already changed)
+            if ($image->getPost() === $this) {
+                $image->setPost(null);
+            }
+        }
 
         return $this;
     }
