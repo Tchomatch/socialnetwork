@@ -1,0 +1,20 @@
+.imageChat{
+    height: 200px;
+    width: 200px;
+}
+.imageUser{
+    height:30px;
+    width: 30px;
+}
+.msgSend{
+    background-color: green;
+    color: azure;
+    border: black solid 1px;
+    border-radius: 20px;
+}
+.msgRec{
+    background-color: black;
+    color: azure;
+    border: black solid 1px;
+    border-radius: 20px;
+}

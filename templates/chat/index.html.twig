@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ChatController!{% endblock %}
+         
+{% block body %}
+
+    {% for message in messages %}
+        {% if userReceiver.id == message.userSender.id %}
+            <div class="row mb-3">
+                <div class="col-6 offset-6 msgSend">
+                    <img class="imageUser" src="{{message.userReceiver.image}}" alt="">
+                    <h6>{{message.userReceiver.pseudo}}</h6>
+                    <h4>{{message.contenu}}</h4>
+                    {% for image in message.imageChats %}
+                    
+                        <img class="imageChat" src="{{asset('uploads/image/' ~ image.image)}}" alt="">
+                    {% endfor %}
+                    <p>envoyer le : {{message.dateEnvoi|date('d/m/Y H:i:s')}}</p>
+                </div>
+            </div>
+        {% else %}
+            <div class="row mb-3">
+                <div class="col-6 msgRec">
+                    <img class="imageUser" src="{{message.userSender.image}}" alt="">
+                    <h6>{{message.userSender.pseudo}}</h6>
+                    <h4>{{message.contenu}}</h4>
+                    {% for image in message.imageChats %}
+                    
+                        <img class="imageChat" src="{{asset('uploads/image/' ~ image.image)}}" alt="">
+                    {% endfor %}
+                    <p>envoyer le : {{message.dateEnvoi|date('d/m/Y H:i:s')}}</p>
+                </div>
+            </div>
+        {% endif %}
+    {% endfor %}
+
+    {{form(formMessage)}}
+{% endblock %}
