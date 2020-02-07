@@ -6,6 +6,8 @@
     {% block stylesheets %}
     <link rel="stylesheet" href="/css/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="/css/fontawesome/all.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+
     {% endblock %}
 </head>
     {% block header %}
@@ -34,6 +36,7 @@
     </nav>
     {% endblock %}
 
+
     
     <body>
         {% block body %}{% endblock %}
@@ -50,6 +53,7 @@
         <section class="col-3 d-flex justify-content-center align-items-center p-2"><a href="{#{{path('conversations')}}#}"><i class="fas fa-3x fa-comments"></i></a></section>
         <section class="col-3 d-flex justify-content-center align-items-center p-2"><a href="{#{{path('settings')}}#}"><i class="fas fa-3x fa-user-cog"></i></a></section>
     </div>
+
     {% endblock %}
 </body>
 </html>
