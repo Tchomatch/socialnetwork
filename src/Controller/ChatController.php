@@ -17,10 +17,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 
+
 class ChatController extends AbstractController
 {
-    # A prevoir une autre route "/conversation/{<id de la conversation recherchée>}"
-    # A prevoir un écran conversations
 
     /**
      * @Route("/profile/{id}/chat", name="chat")
@@ -28,7 +27,7 @@ class ChatController extends AbstractController
     public function chat($id, Request $request, EntityManagerInterface $entityManager, UserRepository $userRepository, ConversationRepository $conversationRepository, MessageRepository $messageRepository)
     {
         $userReceiver = $userRepository->find($id);
-        $userSender =  $userRepository->find(4); // $this->getUser()
+        $userSender = $this->getUser();
         $userSenderId = $userSender->getId();
         $conversation = $conversationRepository->findConv($id, $userSenderId);
 
@@ -39,23 +38,21 @@ class ChatController extends AbstractController
 
         // je recupere les données du form
         $form->handleRequest($request);
+        if  ($conversation === null) {
+        
+            $conversation = new Conversation();
 
+            $conversation->setUserReceiver($userReceiver);
+            $conversation->setUserSender($userSender);
+
+            // j'enregistre ma conversation dans ma BDD
+            $entityManager->persist($conversation);
+            
+        }
         // si les données sont valides
         if ($form->isSubmitted() && $form->isValid()) {
             // je vérifie si une conversation entre les deux utilisateur existe 
-            if  (!empty($conversation)) {
-                $message->setConversation($conversation);
-            } else { // si non je créé une nouvelle conversation
-                $conversation = new Conversation();
-
-                $conversation->setUserReceiver($userReceiver);
-                $conversation->setUserSender($userSender);
-
-                // j'enregistre ma conversation dans ma BDD
-                $entityManager->persist($conversation);
-                $message->setConversation($conversation);
-            }
-
+            $message->setConversation($conversation);
             $message->setDateEnvoi(new \DateTime());
             $message->setUserSender($userSender);
             $message->setUserReceiver($userReceiver);
@@ -73,37 +70,10 @@ class ChatController extends AbstractController
                    
                     try {
                         $file->move(
-                            $this->getParameter('images_original'),
+                            $this->getParameter('images_directory'),
                             $newFilename
                         );
-                        // $cheminImage = $this->getParameter('short_images_original'). $newFilename;
-                        // switch($file->guessExtension())
-                        // {
-                        // case "png":
-                        //     $sourceImage = imagecreatefrompng($cheminImage);
-                        //     break;
-                        // case "gif":
-                        //     $sourceImage = imagecreatefromgif($cheminImage);
-                        //     break;
-                        // default:
-                        //     $sourceImage = imagecreatefromjpeg($cheminImage);
-                        //     break;
-                        // }
-
-                        // $destinationMin = imagecreatetruecolor(100, 100);    
-                        // # Je souhaite connaître la largeur de mon image ciblée
-                        // $widthImage = imagesx($sourceImage);
-                        // # Je souhaite connaître la hauteur de mon image ciblée
-                        // $heightImage = imagesy($sourceImage);
-    
-                        // imagecopyresampled($destinationMin, $sourceImage, 0, 0, 0, 0, 100, 100, $widthImage, $heightImage);
-
-                        // $file->move(
-                        //     $this->getParameter('images_miniature'),
-                        //     $newFilename
-                        // );
-                        // $cheminMin =  $this->getParameter('short_images_miniature'). $newFilename;
-                        // imagejpeg($destinationMin, $cheminMin, 100);
+                        
                     } catch (FileException $e) {
                        
                         // ... handle exception if something happens during file upload
@@ -126,11 +96,11 @@ class ChatController extends AbstractController
                 $entityManager->flush();
             }
             
-           
-
-            //return $this->redirectToRoute('chat', ['id' => $userReceiver->getId()]);
+        
         } 
+       
         $msg = $conversation->getMessages();
+       
         
         return $this->render('chat/index.html.twig', [
             'formMessage' => $form->createView(),
@@ -140,4 +110,25 @@ class ChatController extends AbstractController
             
         ]);
     }
+
+     /**
+     * @Route("/chat/{id}", name="messages")
+     */
+    public function messages($id, UserRepository $userRepository, ConversationRepository $conversationRepository)
+    {
+        $userReceiver = $userRepository->find($id);
+        $userSender =  $userRepository->find(3); // $this->getUser()
+        $userSenderId = $userSender->getId();
+        $conversation = $conversationRepository->findConv($id, $userSenderId);
+
+        $msg = $conversation->getMessages();
+        
+
+        return $this->render('chat/messages.html.twig', [
+            'messages' => $msg,
+            'userReceiver' => $userReceiver,
+            
+            
+        ]);
+    }   
 }
