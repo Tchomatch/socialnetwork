@@ -19,8 +19,6 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 class ChatController extends AbstractController
 {
-    # A prevoir une autre route "/conversation/{<id de la conversation recherchée>}"
-    # A prevoir un écran conversations
 
     /**
      * @Route("/profile/{id}/chat", name="chat")

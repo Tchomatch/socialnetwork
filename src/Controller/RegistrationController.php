@@ -26,7 +26,7 @@ class RegistrationController extends AbstractController
         
 
         if ($form->isSubmitted() && $form->isValid()) {
-
+            $role = $user->setRoles(["ROLE_USER"]);
             $file = $form->get('image')->getData();
 
 

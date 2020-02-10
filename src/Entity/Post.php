@@ -1,6 +1,10 @@
-<?phpnamespace App\Entity;use Doctrine\Common\Collections\ArrayCollection;
+<?php
+namespace App\Entity;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\ORM\Mapping as ORM;/**
+use Doctrine\ORM\Mapping as ORM;
+
+/**
  * @ORM\Entity(repositoryClass="App\Repository\PostRepository")
  */
 class Post
@@ -48,7 +52,8 @@ class Post
   
     public function setContenu(?string $contenu): self
     {
-        $this->contenu = $contenu;        return $this;
+        $this->contenu = $contenu;          
+        return $this;
     }    
   
     public function getDatepost(): ?\DateTimeInterface
@@ -58,7 +63,8 @@ class Post
   
     public function setDatepost(\DateTimeInterface $datepost): self
     {
-        $this->datepost = $datepost;        return $this;
+        $this->datepost = $datepost;        
+        return $this;
     }    
   
     public function getUser(): ?User
@@ -68,7 +74,8 @@ class Post
   
     public function setUser(?User $user): self
     {
-        $this->user = $user;        return $this;
+        $this->user = $user;        
+        return $this;
     }    
   
     /**
