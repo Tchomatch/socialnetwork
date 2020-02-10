@@ -8,7 +8,7 @@
         <h1>Profile page</h1>
     </div>
 
-    <div class="container">
+    <div class="container mb-4">
        
         <div class="row">
 
@@ -36,57 +36,60 @@
         </div> 
         
     </div>
-    
+
+    {% if userConnect == user %}
+
     <div class="container">
-        <button onclick="myDisplay()" class="btn btn-success">+</button>
-            <div id="george">
-                {{ form(addPost) }}
-            </div>
-    </div>
-
-    <script>
-
-        function myDisplay(){
-
-            $("#george").toggle(
-                function() {
-                    $(this).addClass("george");
-                }, function() {
-                    $(this).removeClass("george");
-                }
-            );
-
-        }
-        
-    </script>
-
-    {% if affichagePosts %}
-
-        <div class="container border">
-
-            <div class="row p-3">
-                <img class="pr-2" style="width:50px;height:50px;" src="{{ asset('uploads/image/' ~ user.image ) }}" alt="Image user's">
-                <p>{{ user.pseudo }}</p> 
-            </div>
-            
-            {% for affichagePost in affichagePosts %}
-                
-                {% for image in affichagePost.imagePost %}
-
-                    <img style="width:100px;height:100px;" src="{{ asset('uploads/image/' ~ image.image ) }}" alt="">
-                
-                {% endfor %}
-
-                <p>{{ affichagePost.contenu }}</p>
-                <small>{{ affichagePost.datepost|date("d-m-Y H-i-s") }}</small>
-
-            {% endfor %}
-
+        <button onclick="myDisplay()" class="btn btn-primary mb-2">+</button>
+        <div id="george">
+            {{ form(addPost) }}
         </div>
+    </div>
 
     {% endif %}
 
+    {% if affichagePosts %}
 
+        {% for affichagePost in affichagePosts %}
+
+            {% if affichagePost.user == user %}
+
+                <div class="container border">
+
+                    <div class="row p-3">
+                        <img class="pr-2" style="width:50px;height:50px;" src="{{ asset('uploads/image/' ~ user.image ) }}" alt="Image user's">
+                        <p>{{ user.pseudo }}</p> 
+                    </div>
+
+                    {% for image in affichagePost.imagePost %}
+
+                        <img style="width:100px;height:100px;" src="{{ asset('uploads/image/' ~ image.image ) }}" alt="">
+                    
+                    {% endfor %}
+
+                    <div class="row">
+
+                        <div class="container col-8">
+                            <p>{{ affichagePost.contenu }}</p>
+                            <small>{{ affichagePost.datepost|date("d-m-Y H-i-s") }}</small>
+                        </div>
+
+                        {% if userConnect == user %}
+                            <div class="container col-2 d-flex flex-column justify-content-around">
+                                <button class="btn btn-sm btn-danger">Supprimer</button>
+                                <button class="btn btn-sm btn-primary">Modifier</button>
+                            </div>     
+                        {% endif %}
+                                                
+                    </div>
+                        
+                </div>
+
+            {% endif %}
+
+        {% endfor %}
+
+    {% endif %}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
+    <script src="{{ asset('js/profile.js') }}"></script>
 {% endblock %}
