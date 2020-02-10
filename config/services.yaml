@@ -5,6 +5,10 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     images_directory: '%kernel.project_dir%/public/uploads/image'
+    # short_images_original: '/public/uploads/image'
+    # images_miniature: '%kernel.project_dir%/public/uploads/miniature'
+    # short_images_miniature: '/public/uploads/miniature'
+
 
 services:
     # default configuration for services in *this* file

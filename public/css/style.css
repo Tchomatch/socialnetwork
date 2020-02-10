@@ -1,0 +1,39 @@
+
+#george{
+    display: none;
+}
+.headerChat{
+    background-color: black;
+    color: white;
+    
+}
+.imageChat{
+    height: 200px;
+    width: 200px;
+}
+.imageUserChat{
+    height:30px;
+    width: 30px;
+    border-radius: 20px;
+}
+.msgSend{
+    background-color: green;
+    color: azure;
+    border: black solid 1px;
+    border-radius: 20px;
+    
+}
+.msgRec{
+    background-color: black;
+    color: azure;
+    border: black solid 1px;
+    border-radius: 20px;
+}
+.imageUserHeader{
+    height:50px;
+    width: 50px;
+    border-radius: 50%;
+}
+.chat{
+    border: black solid 1px;
+}

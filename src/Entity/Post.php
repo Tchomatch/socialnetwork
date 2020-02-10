@@ -88,12 +88,12 @@ class Post
     /**
      * @return Collection|ImagePost[]
      */
-    public function getImage(): Collection
+    public function getImagePost(): Collection
     {
         return $this->image;
     }
 
-    public function addImage(ImagePost $image): self
+    public function addImagePost(ImagePost $image): self
     {
         if (!$this->image->contains($image)) {
             $this->image[] = $image;
@@ -103,7 +103,7 @@ class Post
         return $this;
     }
 
-    public function removeImage(ImagePost $image): self
+    public function removeImagePost(ImagePost $image): self
     {
         if ($this->image->contains($image)) {
             $this->image->removeElement($image);
