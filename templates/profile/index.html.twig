@@ -17,8 +17,12 @@
                 {{ user.pseudo }}</p>
             </div>
 
-            {% if user.information is defined %}
-                <div class="col-3 border-right">
+            <div class="col-4">
+                <img style="width:200px;height:200px;" src="{{ asset('uploads/image/' ~ user.image ) }}" alt="Image user's">
+            </div>
+
+             {% if user.information %}
+                <div class="col-3 border-left">
                     <p>{{ user.information.nom }}<br>
                     {{ user.information.prenom }}<br>
                     {{ user.information.dateNaissance|date("Y-m-d") }}<br>
@@ -28,19 +32,61 @@
                     {{ user.information.description }}</p>
                 </div>
             {% endif %}
-
-            <div class="col-4">
-                <img style="width:200px;hieght:200px;" src="{{ user.image }}" alt="Image user's">
-            </div>
         
         </div> 
         
     </div>
     
     <div class="container">
-        <button class="btn btn-success">+</button>
-
-        {{ form(addPost) }}
-
+        <button onclick="myDisplay()" class="btn btn-success">+</button>
+            <div id="george">
+                {{ form(addPost) }}
+            </div>
     </div>
+
+    <script>
+
+        function myDisplay(){
+
+            $("#george").toggle(
+                function() {
+                    $(this).addClass("george");
+                }, function() {
+                    $(this).removeClass("george");
+                }
+            );
+
+        }
+        
+    </script>
+
+    {% if affichagePosts %}
+
+        <div class="container border">
+
+            <div class="row p-3">
+                <img class="pr-2" style="width:50px;height:50px;" src="{{ asset('uploads/image/' ~ user.image ) }}" alt="Image user's">
+                <p>{{ user.pseudo }}</p> 
+            </div>
+            
+            {% for affichagePost in affichagePosts %}
+                
+                {% for image in affichagePost.imagePost %}
+
+                    <img style="width:100px;height:100px;" src="{{ asset('uploads/image/' ~ image.image ) }}" alt="">
+                
+                {% endfor %}
+
+                <p>{{ affichagePost.contenu }}</p>
+                <small>{{ affichagePost.datepost|date("d-m-Y H-i-s") }}</small>
+
+            {% endfor %}
+
+        </div>
+
+    {% endif %}
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
 {% endblock %}
