@@ -1,12 +1,6 @@
-<?php
-
-namespace App\Entity;
-
-use Doctrine\Common\Collections\ArrayCollection;
+<?phpnamespace App\Entity;use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\ORM\Mapping as ORM;
-
-/**
+use Doctrine\ORM\Mapping as ORM;/**
  * @ORM\Entity(repositoryClass="App\Repository\PostRepository")
  */
 class Post
@@ -21,88 +15,78 @@ class Post
     /**
      * @ORM\Column(type="string", length=350, nullable=true)
      */
-    private $contenu;
-
+    private $contenu;    
+    
     /**
      * @ORM\Column(type="datetime")
      */
-    private $datepost;
-
+    private $datepost;    
+    
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="posts")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $user;
-
+    private $user;    
+    
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\ImagePost", mappedBy="post")
      */
-    private $image;
-
-    public function __construct()
+    private $image;    public function __construct()
     {
         $this->image = new ArrayCollection();
-    }
-
+    }    
+    
     public function getId(): ?int
     {
         return $this->id;
-    }
-
+    }    
+  
     public function getContenu(): ?string
     {
         return $this->contenu;
-    }
-
+    }    
+  
     public function setContenu(?string $contenu): self
     {
-        $this->contenu = $contenu;
-
-        return $this;
-    }
-
+        $this->contenu = $contenu;        return $this;
+    }    
+  
     public function getDatepost(): ?\DateTimeInterface
     {
         return $this->datepost;
-    }
-
+    }    
+  
     public function setDatepost(\DateTimeInterface $datepost): self
     {
-        $this->datepost = $datepost;
-
-        return $this;
-    }
-
+        $this->datepost = $datepost;        return $this;
+    }    
+  
     public function getUser(): ?User
     {
         return $this->user;
-    }
-
+    }    
+  
     public function setUser(?User $user): self
     {
-        $this->user = $user;
-
-        return $this;
-    }
-
+        $this->user = $user;        return $this;
+    }    
+  
     /**
      * @return Collection|ImagePost[]
      */
     public function getImagePost(): Collection
     {
         return $this->image;
-    }
-
+    }    
+  
     public function addImagePost(ImagePost $image): self
     {
         if (!$this->image->contains($image)) {
             $this->image[] = $image;
             $image->setPost($this);
-        }
-
-        return $this;
-    }
-
+        }        return $this;
+    }    
+  
     public function removeImagePost(ImagePost $image): self
     {
         if ($this->image->contains($image)) {
@@ -111,8 +95,6 @@ class Post
             if ($image->getPost() === $this) {
                 $image->setPost(null);
             }
-        }
-
-        return $this;
+        }        return $this;
     }
 }
