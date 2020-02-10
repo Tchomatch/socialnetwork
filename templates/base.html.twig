@@ -12,7 +12,7 @@
 </head>
     {% block header %}
     <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">#Henrietta</a>
+        <a class="navbar-brand" href="#">#HenriettO</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -39,7 +39,9 @@
 
     
     <body>
-        {% block body %}{% endblock %}
+        <main class="container">
+            {% block body %}{% endblock %}
+        </main>
         {% block javascripts %}
         <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
 	    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -53,6 +55,12 @@
         <section class="col-3 d-flex justify-content-center align-items-center p-2"><a href="{{path('profile_show', {'id' : user.id })}}"><i class="fas fa-3x fa-user"></i></a></section>
         <section class="col-3 d-flex justify-content-center align-items-center p-2"><a href="{#{{path('conversations')}}#}"><i class="fas fa-3x fa-comments"></i></a></section>
         <section class="col-3 d-flex justify-content-center align-items-center p-2"><a href="{#{{path('settings')}}#}"><i class="fas fa-3x fa-user-cog"></i></a></section>
+    </div>
+    {% else %}
+    <div class="row fixed-bottom bg-dark text-light d-flex justify-content-center align-items-center">
+        <section class="welcomeMessage text-center d-flex align-items-center">
+            <h1>Bienvenue sur #HenriettO</h1>
+        </section>
     </div>
     {% endif %}
     {% endblock %}
