@@ -25,7 +25,7 @@
                 <div class="col-3 border-left">
                     <p>{{ user.information.nom }}<br>
                     {{ user.information.prenom }}<br>
-                    {{ user.information.dateNaissance|date("Y-m-d") }}<br>
+                    {{ user.information.dateNaissance|date("d-m-Y") }}<br>
                     {{ user.information.adresse }}<br>
                     {{ user.information.ville }}<br>
                     {{ user.information.cp }}<br>
@@ -67,19 +67,21 @@
                     
                     {% endfor %}
 
-                        <div class="row">
+                    <div class="row">
 
-                            <div class="container col-8">
-                                <p>{{ affichagePost.contenu }}</p>
-                                <small>{{ affichagePost.datepost|date("d-m-Y H-i-s") }}</small>
-                            </div>
+                        <div class="container col-8">
+                            <p>{{ affichagePost.contenu }}</p>
+                            <small>{{ affichagePost.datepost|date("d-m-Y H-i-s") }}</small>
+                        </div>
 
+                        {% if userConnect == user %}
                             <div class="container col-2 d-flex flex-column justify-content-around">
                                 <button class="btn btn-sm btn-danger">Supprimer</button>
                                 <button class="btn btn-sm btn-primary">Modifier</button>
-                            </div>                            
-
-                        </div>
+                            </div>     
+                        {% endif %}
+                                                
+                    </div>
                         
                 </div>
 

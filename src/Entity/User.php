@@ -10,7 +10,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
- * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
+ * @UniqueEntity(fields={"email"}, message="Il existe déjà un compte avec cet email.")
+ * @UniqueEntity(fields={"pseudo"}, message="Il existe déjà un compte avec ce pseudo.")
  */
 class User implements UserInterface
 {
@@ -53,7 +54,11 @@ class User implements UserInterface
     private $information;
     
     /**
+<<<<<<< HEAD
+     * @ORM\OneToMany(targetEntity="App\Entity\Post", mappedBy="User")
+=======
      * @ORM\OneToMany(targetEntity="App\Entity\Post", mappedBy="user")
+>>>>>>> 4ecfc66a35ab89cac7c15c730e58818aadbb1659
      */
     private $posts;
 

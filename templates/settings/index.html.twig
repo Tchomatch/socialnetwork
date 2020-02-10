@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AdminController!{% endblock %}
+
+{% block body %}
+        <h1>Informations initiales</h1>
+            {{ form_start(form) }}
+            {{ form_end(form) }}
+        <h1>Informations supplémentaires</h1>
+            {{ form_start(form2) }}
+            {{ form_end(form2) }}
+{% endblock %}

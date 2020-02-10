@@ -5,10 +5,8 @@ namespace App\Controller;
 use App\Entity\ImagePost;
 use App\Entity\Post;
 use App\Form\PostType;
-use App\Entity\Information;
 use App\Repository\PostRepository;
 use App\Repository\UserRepository;
-use App\Repository\InformationRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -18,19 +16,22 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class ProfileController extends AbstractController
 {
     /**
+     * @Route("/profile", name="profile_show")
      * @Route("/profile/{id}", name="profile_show")
      */
-    public function profile_show($id, UserRepository $userRepository, Request $request, PostRepository $postRepository, UserInterface $userInterface)
+    public function profile_show(UserRepository $userRepository, Request $request, PostRepository $postRepository, UserInterface $userInterface, $id = false)
     {
         $entityManager = $this->getDoctrine()->getManager();
-
-        // recuperation de l'id dans l'url
-        $user = $userRepository->find($id);
-        // recuperation des informations du formulaire information
-        $userInformation = $user->getInformation();
-
+        
         // création d'un utilisateur connecté pour différencier chaque post de chaque user
         $userConnect = $userInterface;
+    
+        if($id === false){
+            $user = $this->getUser();
+            $id = $user->getId();
+        } else{
+            $user = $userRepository->find($id);
+        }
 
         // Instanciation d'un nouveau post
         $post = new Post();
@@ -86,6 +87,9 @@ class ProfileController extends AbstractController
 
         // Requete SQL
         $affichagePost = $postRepository->findBy(['user' => $id], ['datepost' => 'DESC'], 1);
+
+        // recuperation des informations du formulaire information
+        $userInformation = $user->getInformation();
 
         // Affichage des formulaire et des informations
         return $this->render('profile/index.html.twig', [
