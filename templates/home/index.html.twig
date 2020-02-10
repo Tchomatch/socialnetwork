@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+        <div class="row">
+                {% for post in allPost  %}
+                        <div class="col-6">
+                                <h3>{{ post.user.pseudo }}</h3>
+                                <p>{{ post.contenu }}<p>
+                                <h6>{{ post.datetime|date('d/m/Y H:i:s') }}</h6>
+                        </div>
+                {% endfor %}
+        </div>
+{% endblock %}
