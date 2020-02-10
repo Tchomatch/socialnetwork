@@ -23,7 +23,6 @@
 .headerChat{
     background-color: black;
     color: white;
-    
 }
 .imageChat{
     height: 200px;
@@ -39,7 +38,6 @@
     color: azure;
     border: black solid 1px;
     border-radius: 20px;
-    
 }
 .msgRec{
     background-color: black;
@@ -54,5 +52,4 @@
 }
 .chat{
     border: black solid 1px;
-
 }

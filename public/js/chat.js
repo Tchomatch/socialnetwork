@@ -11,8 +11,6 @@ function charger(id){
 
 function chargerChat(id) {
 
-    
-
     $.ajax({
         method: "POST",
         url: "/chat/"+id, 
