@@ -16,12 +16,14 @@ class InformationType extends AbstractType
         $builder
             ->add('nom')
             ->add('prenom')
-            ->add('date_naissance', BirthdayType::class)
+            ->add('date_naissance', BirthdayType::class, [
+                'format' => 'dd-MM-yyyy',
+            ])
             ->add('adresse')
             ->add('ville')
             ->add('cp')
             ->add('description')
-            ->add('enregistrer', SubmitType::class)
+            ->add('modifier', SubmitType::class)
         ;
     }
 
