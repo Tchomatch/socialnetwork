@@ -51,17 +51,34 @@ class User implements UserInterface
      * @ORM\OneToOne(targetEntity="App\Entity\Information", mappedBy="user", cascade={"persist", "remove"})
      */
     private $information;
-
+    
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Post", mappedBy="user")
      */
     private $posts;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Message", mappedBy="userReceiver")
+     */
+    private $messages;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Message", mappedBy="userSender")
+     */
+    private $messageSender;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Conversation", mappedBy="userReceiver")
+     */
+    private $conversations;
+
     public function __construct()
     {
+        $this->messages = new ArrayCollection();
+        $this->messageSender = new ArrayCollection();
+        $this->conversations = new ArrayCollection();
         $this->posts = new ArrayCollection();
     }
-
 
     public function getId(): ?int
     {
@@ -165,6 +182,37 @@ class User implements UserInterface
         return $this;
     }
 
+    /**
+     * @return Collection|Message[]
+     */
+    public function getMessages(): Collection
+    {
+        return $this->messages;
+    }
+
+    public function addMessage(Message $message): self
+    {
+        if (!$this->messages->contains($message)) {
+            $this->messages[] = $message;
+            $message->setUserReceiver($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMessage(Message $message): self
+    {
+        if ($this->messages->contains($message)) {
+            $this->messages->removeElement($message);
+            // set the owning side to null (unless already changed)
+            if ($message->getUserReceiver() === $this) {
+                $message->setUserReceiver(null);
+            }
+        }
+
+        return $this;
+    }
+
     public function getInformation(): ?Information
     {
         return $this->information;
@@ -177,6 +225,24 @@ class User implements UserInterface
         // set the owning side of the relation if necessary
         if ($information->getUser() !== $this) {
             $information->setUser($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Message[]
+     */
+    public function getMessageSender(): Collection
+    {
+        return $this->messageSender;
+    }
+
+    public function addMessageSender(Message $messageSender): self
+    {
+        if (!$this->messageSender->contains($messageSender)) {
+            $this->messageSender[] = $messageSender;
+            $messageSender->setUserSender($this);
         }
 
         return $this;
@@ -200,6 +266,19 @@ class User implements UserInterface
         return $this;
     }
 
+    public function removeMessageSender(Message $messageSender): self
+    {
+        if ($this->messageSender->contains($messageSender)) {
+            $this->messageSender->removeElement($messageSender);
+            // set the owning side to null (unless already changed)
+            if ($messageSender->getUserSender() === $this) {
+                $messageSender->setUserSender(null);
+            }
+        }
+
+        return $this;
+    }
+    
     public function removePost(Post $post): self
     {
         if ($this->posts->contains($post)) {
@@ -213,4 +292,34 @@ class User implements UserInterface
         return $this;
     }
 
+    /**
+     * @return Collection|Conversation[]
+     */
+    public function getConversations(): Collection
+    {
+        return $this->conversations;
+    }
+
+    public function addConversation(Conversation $conversation): self
+    {
+        if (!$this->conversations->contains($conversation)) {
+            $this->conversations[] = $conversation;
+            $conversation->setUserReceiver($this);
+        }
+
+        return $this;
+    }
+
+    public function removeConversation(Conversation $conversation): self
+    {
+        if ($this->conversations->contains($conversation)) {
+            $this->conversations->removeElement($conversation);
+            // set the owning side to null (unless already changed)
+            if ($conversation->getUserReceiver() === $this) {
+                $conversation->setUserReceiver(null);
+            }
+        }
+
+        return $this;
+    }
 }

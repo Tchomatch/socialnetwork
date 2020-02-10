@@ -38,11 +38,27 @@
     </div>
     
     <div class="container">
-        <button class="btn btn-success">+</button>
-
-        {{ form(addPost) }}
-
+        <button onclick="myDisplay()" class="btn btn-success">+</button>
+            <div id="george">
+                {{ form(addPost) }}
+            </div>
     </div>
+
+    <script>
+
+        function myDisplay(){
+
+            $("#george").toggle(
+                function() {
+                    $(this).addClass("george");
+                }, function() {
+                    $(this).removeClass("george");
+                }
+            );
+
+        }
+        
+    </script>
 
     {% if affichagePosts %}
 
@@ -69,5 +85,8 @@
         </div>
 
     {% endif %}
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 {% endblock %}
