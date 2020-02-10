@@ -54,7 +54,11 @@ class User implements UserInterface
     private $information;
 
     /**
+<<<<<<< HEAD
      * @ORM\OneToMany(targetEntity="App\Entity\Post", mappedBy="User")
+=======
+     * @ORM\OneToMany(targetEntity="App\Entity\Post", mappedBy="user")
+>>>>>>> 4ecfc66a35ab89cac7c15c730e58818aadbb1659
      */
     private $posts;
 
