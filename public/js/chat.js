@@ -1,19 +1,24 @@
-function charger(){
+function charger(id){
+
+    console.log(3);
 
     setTimeout( function(){
-        // on lance une requête AJAX
-        $.ajax({
-            url : "/profile/5/chat",
-            type : GET,
-            success : function(html){
-                
-            }
-        });
-
-        charger(); // on relance la fonction
-
+        
+        chargerChat(id);
     }, 5000); // on exécute le chargement toutes les 5 secondes
 
 }
 
-charger();
+function chargerChat(id) {
+
+    $.ajax({
+        method: "POST",
+        url: "/chat/"+id, 
+      })
+    .done(function( dataMessages ) {
+        charger(id);
+        $('#chatMessages').html(dataMessages);
+    });
+}
+
+

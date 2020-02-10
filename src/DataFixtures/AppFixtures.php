@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Post;
 use App\Entity\User;
 use App\Entity\Information;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -56,6 +57,15 @@ class AppFixtures extends Fixture
         ->setDescription('Bonjour a tous !')
         ->setUser($user);
         $manager->persist($information);
+
+        $post = new Post();
+        $post->setUser($user)
+        ->setContenu('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.')
+        ->setDateTime(new \DateTime());
+        
+
+        $manager->persist($post);
+
 
         $manager->flush();
     }
