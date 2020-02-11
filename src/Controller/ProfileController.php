@@ -2,16 +2,17 @@
 
 namespace App\Controller;
 
-use App\Entity\ImagePost;
 use App\Entity\Post;
 use App\Form\PostType;
+use App\Entity\ImagePost;
 use App\Repository\PostRepository;
 use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 class ProfileController extends AbstractController
 {
@@ -82,7 +83,8 @@ class ProfileController extends AbstractController
             if(null != $post->getContenu() || !empty($file)){
                $entityManager->flush(); 
             }
-            
+
+            return $this->redirectToRoute('profile_show');
         }
 
         // Requete SQL
@@ -99,5 +101,58 @@ class ProfileController extends AbstractController
             'affichagePosts' => $affichagePost,
             'userConnect' => $userConnect
         ]);
+    }
+
+    /**
+     * @Route("/profile/post-edit/{id}", name="post_edit", methods={"GET","POST"})
+     */
+    public function edit(Request $request, Post $post): Response
+    {
+        $form = $this->createForm(PostType::class, $post);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            
+
+            return $this->redirectToRoute('profile_show');
+        }
+
+        return $this->render('profile/edit.html.twig', [
+            'post' => $post,
+            'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/profile/post-delete/{id}", name="post_delete", methods={"DELETE"})
+     */
+    public function delete(Request $request, Post $post): Response
+    {
+        if($this->isCsrfTokenValid('delete'.$post->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+
+            $listImage = $post->getImagePost();
+
+            foreach($listImage as $image){
+                $post->removeImagePost($image);
+            }
+
+            $entityManager->remove($post);
+            $entityManager->flush();
+
+            $message = $this->addFlash(
+                'notice',
+                'Votre post a été supprimé'
+            );
+
+            return $this->redirectToRoute('profile_show');
+        }
+
+        return $this->render('profile/index.html.twig', [
+            'message' => $message
+        ]);
+        
     }
 }

@@ -22,12 +22,7 @@ class ImagePost
     private $image;
 
     /**
-<<<<<<< HEAD
-     * @ORM\ManyToOne(targetEntity="App\Entity\Post", inversedBy="imagePosts")
-     * @ORM\JoinColumn(nullable=false)
-=======
      * @ORM\ManyToOne(targetEntity="App\Entity\Post", inversedBy="image")
->>>>>>> 4ecfc66a35ab89cac7c15c730e58818aadbb1659
      */
     private $post;
 

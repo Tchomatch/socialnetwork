@@ -35,7 +35,9 @@ class Post
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\ImagePost", mappedBy="post")
      */
-    private $image;    public function __construct()
+    private $image;    
+    
+    public function __construct()
     {
         $this->image = new ArrayCollection();
     }    

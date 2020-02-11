@@ -17,21 +17,11 @@
         {% endfor %}
         
         <div class="row">
-<<<<<<< HEAD
-                {% for post in allPost  %}
-                        <div class="col-12">
-                                <h3>{{ post.user.pseudo }}</h3>
-                                <p>{{ post.contenu }}<p>
-                                <h6>{{ post.datetime|date('d/m/Y H:i:s') }}</h6>
-                        </div>
-                {% endfor %}
-=======
             <div class="container">
                 <p>{{ post.contenu }}</p>
                 <small class="float-right mt-2">{{ post.datepost|date("d-m-Y H-i-s") }}</small>
             </div>
             
->>>>>>> origin/beta
         </div>
         
         {# <div class="container col-2 d-flex flex-column justify-content-around">

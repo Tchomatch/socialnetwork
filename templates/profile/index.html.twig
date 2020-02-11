@@ -1,54 +1,60 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Profile{% endblock %}
+{% block title %}Profile
+{% endblock %}
 
 {% block body %}
 
-    <div class="d-flex justify-content-center mb-3">
-        <h1>Profile page</h1>
-    </div>
+	<div class="text-center mb-3">
+		<h1>Profile page</h1>
+		{% for message in app.flashes('notice') %}
 
-    <div class="container mb-4">
-       
-        <div class="row">
+			<p>{{ message }}</p>
 
-            <div class="col-4 border-right">
-                <p>{{ user.email }}<br>
-                {{ user.pseudo }}</p>
-            </div>
+		{% endfor %}
+	</div>
 
-            <div class="col-4">
-                <img style="width:200px;height:200px;" src="{{ asset('uploads/image/' ~ user.image ) }}" alt="Image user's">
-            </div>
+	<div class="container mb-4">
 
-             {% if user.information %}
-                <div class="col-3 border-left">
-                    <p>{{ user.information.nom }}<br>
-                    {{ user.information.prenom }}<br>
-                    {{ user.information.dateNaissance|date("d-m-Y") }}<br>
-                    {{ user.information.adresse }}<br>
-                    {{ user.information.ville }}<br>
-                    {{ user.information.cp }}<br>
-                    {{ user.information.description }}</p>
-                </div>
-            {% endif %}
-        
-        </div> 
-        
-    </div>
+		<div class="row">
 
-    {% if userConnect == user %}
+			<div class="col-4 border-right">
+				<p>{{ user.email }}<br>
+			    {{ user.pseudo }}</p>
+			</div>
 
-    <div class="container">
-        <button onclick="myDisplay()" class="btn btn-primary mb-2">+</button>
-        <div id="george">
-            {{ form(addPost) }}
-        </div>
-    </div>
+			<div class="col-4">
+				<img style="width:200px;height:200px;" src="{{ asset('uploads/image/' ~ user.image ) }}" alt="Image user's">
+			</div>
 
-    {% endif %}
+			{% if user.information %}
+				<div class="col-3 border-left">
+					<p>{{ user.information.nom }}<br>
+						{{ user.information.prenom }}<br>
+						{{ user.information.dateNaissance|date("d-m-Y") }}<br>
+						{{ user.information.adresse }}<br>
+						{{ user.information.ville }}<br>
+						{{ user.information.cp }}<br>
+						{{ user.information.description }}</p>
+				</div>
+			{% endif %}
 
-    {% if affichagePosts %}
+		</div>
+
+	</div>
+
+	{% if userConnect == user %}
+
+		<div class="container">
+			<button onclick="myDisplay()" class="btn btn-primary mb-2">+</button>
+			<div id="george">
+				{{ form(addPost) }}
+			</div>
+		</div>
+
+	{% endif %}
+
+	{% if affichagePosts %}
 
         {% for affichagePost in affichagePosts %}
 
@@ -57,14 +63,14 @@
                 <div class="container border">
 
                     <div class="row p-3">
-                        <img class="pr-2" style="width:50px;height:50px;" src="{{ asset('uploads/image/' ~ user.image ) }}" alt="Image user's">
-                        <p>{{ user.pseudo }}</p> 
+                        <img class="pr-2" style="width:50px;height:50px;" src="{{ asset('uploads/image/' ~ user.image ) }}" alt="Image utilisateur">
+                        <p>{{ user.pseudo }}</p>
                     </div>
 
                     {% for image in affichagePost.imagePost %}
 
                         <img style="width:100px;height:100px;" src="{{ asset('uploads/image/' ~ image.image ) }}" alt="">
-                    
+
                     {% endfor %}
 
                     <div class="row">
@@ -75,14 +81,14 @@
                         </div>
 
                         {% if userConnect == user %}
-                            <div class="container col-2 d-flex flex-column justify-content-around">
-                                <button class="btn btn-sm btn-danger">Supprimer</button>
-                                <button class="btn btn-sm btn-primary">Modifier</button>
-                            </div>     
+                            <div class="container col-3 d-flex flex-column justify-content-around">
+                                <a class="btn btn-primary mb-1" href="{{ path('post_edit', {'id': affichagePost.id}) }}">Modification</a>
+                                {% include 'profile/_delete_form.html.twig' %}
+                            </div>
                         {% endif %}
-                                                
+
                     </div>
-                        
+
                 </div>
 
             {% endif %}
@@ -90,5 +96,5 @@
         {% endfor %}
 
     {% endif %}
-    <script src="{{ asset('js/profile.js') }}"></script>
+	<script src="{{ asset('js/profile.js') }}"></script>
 {% endblock %}

@@ -45,17 +45,10 @@
     {% block footer %}
     {% if is_granted('IS_AUTHENTICATED_FULLY')%}
     <div class="row fixed-bottom bg-dark text-light d-flex justify-content-center align-items-center">
-<<<<<<< HEAD
-        <section class="col-3 d-flex justify-content-center align-items-center p-2"><a href="{{path('home')}}"><i class="fas fa-3x fa-home"></i></a></section>
-        <section class="col-3 d-flex justify-content-center align-items-center p-2"><a href="{{ path('profile_show') }}"><i class="fas fa-3x fa-user"></i></a></section>
-        <section class="col-3 d-flex justify-content-center align-items-center p-2"><a href="{#{{path('conversations')}}#}"><i class="fas fa-3x fa-comments"></i></a></section>
-        <section class="col-3 d-flex justify-content-center align-items-center p-2"><a href="{{path('settings')}}"><i class="fas fa-3x fa-user-cog"></i></a></section>
-=======
         <section class="col-3 d-flex justify-content-center align-items-center p-2"><a href="{{ path('home') }}"><i class="fas text-light fa-3x fa-home"></i></a></section>
         <section class="col-3 d-flex justify-content-center align-items-center p-2"><a href="{{ path('profile_show') }}"><i class="fas text-light fa-3x fa-user"></i></a></section>
         <section class="col-3 d-flex justify-content-center align-items-center p-2"><a href="{#{{ path('conversations') }}#}"><i class="fas text-light fa-3x fa-comments"></i></a></section>
         <section class="col-3 d-flex justify-content-center align-items-center p-2"><a href="{{ path('settings') }}"><i class="fas text-light fa-3x fa-user-cog"></i></a></section>
->>>>>>> origin/beta
     </div>
     {% else %}
     <div class="row fixed-bottom bg-dark text-light d-flex justify-content-center align-items-center">
@@ -70,6 +63,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script type="text/javascript" src="/js/fontawesome/all.min.js"></script>
     <script type="text/javascript" src="/js/bootstrap/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/js/main.js"></script>
     {% endblock %}
     {% block additionnalJS %}{% endblock %}
 </body>
