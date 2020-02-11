@@ -17,14 +17,12 @@
     border-radius: 0 .25rem .25rem 0;
 }
 
-
 #george{
     display: none;
 }
 .headerChat{
     background-color: black;
     color: white;
-    
 }
 .imageChat{
     height: 200px;
@@ -40,7 +38,6 @@
     color: azure;
     border: black solid 1px;
     border-radius: 20px;
-    
 }
 .msgRec{
     background-color: black;
@@ -55,5 +52,28 @@
 }
 .chat{
     border: black solid 1px;
+}
 
+/* ajout de la modale de chargement scrollPost */
+.modal {
+    display:    none;
+    position:   fixed;
+    z-index:    1000;
+    bottom:     0;
+    left:       0;
+    height:     100%;
+    width:      100%;
+    background: rgba( 255, 255, 255, .8 ) 
+                url('../uploads/image/ajax-loader.gif') 
+                50% 50% 
+                no-repeat;
+}
+
+
+body.loading .modal {
+    overflow: hidden;   
+}
+
+body.loading .modal {
+    display: block;
 }

@@ -1,13 +1,51 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-        <div class="row">
-                {% for post in allPost  %}
-                        <div class="col-6">
-                                <h3>{{ post.user.pseudo }}</h3>
-                                <p>{{ post.contenu }}<p>
-                                <h6>{{ post.datetime|date('d/m/Y H:i:s') }}</h6>
-                        </div>
-                {% endfor %}
+{% if is_granted('IS_AUTHENTICATED_FULLY')%}
+
+<div class="my-5">
+    
+    {% for post in allPost  %}
+    <div class="container border my-3">
+        <div class="row p-3">
+            <img class="pr-2" style="width:50px;height:50px;" src="{{ asset('uploads/image/' ~ post.user.image ) }}" alt="Image user's">
+            <p>{{ post.user.pseudo }}</p> 
         </div>
+        
+        {% for image in post.imagePost %}
+        <img style="width:100px;height:100px;" src="{{ asset('uploads/image/' ~ image.image ) }}" alt="">        
+        {% endfor %}
+        
+        <div class="row">
+            <div class="container">
+                <p>{{ post.contenu }}</p>
+                <small class="float-right mt-2">{{ post.datepost|date("d-m-Y H-i-s") }}</small>
+            </div>
+            
+        </div>
+        
+        {# <div class="container col-2 d-flex flex-column justify-content-around">
+            <button class="btn btn-sm btn-danger">Supprimer</button>
+            <button class="btn btn-sm btn-primary">Modifier</button>
+        </div>      #}
+    </div>
+    {% endfor %}
+    
+    <div class="modal"></div>
+    
+    {% else %}
+    <div class="row d-flex align-items-center">
+        <h1 class="text-center pt-md-5 col-12">Bienvenue sur #HentiettO</h1>
+        <p class="text-center text-warning col-12">Vous n'êtes actuellement pas connecté, pensez à vous authentifier ou à vous enregistrer!</p>
+        <button class="btn mr-1 btn-primary col-2 offset-4"><a  class="text-light" href="{{ path('app_login')}}">Se connecter</a></button>
+        <button class="btn ml-1 btn-secondary col-2"><a class="text-light" href="{{ path('app_register')}}">S'inscrire</a></button>
+    </div>
+    {% endif %}
+</div>
+
+
+
+{% endblock %}
+{% block additionnalJS %}
+<script src="{{ asset('js/postScroll.js') }}"></script>
 {% endblock %}
