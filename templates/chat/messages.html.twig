@@ -1,0 +1,37 @@
+<div id="chatMessages">
+    {# je récupère une collection de messages liée à une conversation et je fais une boucle pour récupérer chaque message et les afficher un pas un #}
+    {% for message in messages %}
+    
+    {# je vérifie si l'id du user avec qui je chat est le même que celui d'user qui envoie le message #}
+    {# si oui alors l'autre user est celui qui envoie le message #}
+    {% if userReceiver.id == message.userSender.id %}
+    {# je crée des variables avec des valeurs différente d'affichage en fonction des messages envoyés et recus  #}
+    {%  set classType = 'offset-1 msgRec' %}
+    {% else %}
+    {# si non je suis le user qui envoie le message #}
+    {% set classType = 'offset-6 msgSend' %}
+    {% endif %}
+    
+    <div class="row mb-3">
+        {# j'appelle la variable contenant les valeurs en fonction du user qui a envoyé le message  #}
+        <div class="col-5 {{classType}}  ">
+            <div class="row">
+                {# je récupère l'image de profile du user qui envoie le message et le pseudo de ce user  #}
+                <img class="imageUserChat ml-1" src="{{message.userSender.image}}" alt="">
+                <h6 class="ml-1">{{message.userSender.pseudo}}</h6>
+            </div>
+            {# j'affiche le contenu du message #}
+            <h4>{{message.contenu}}</h4>
+            
+            {# j'affiche le ou les images lié au message  #}
+            {% for image in message.imageChats %}
+            
+            <img class="imageChat" src="{{asset('uploads/image/' ~ image.image)}}" alt="">
+            {% endfor %} <br>
+            {# j'affiche la date d'envoie du message #}
+            <small>envoyer le : {{message.dateEnvoi|date('d/m/Y H:i:s')}}</small>
+        </div>
+    </div>
+    
+    {% endfor %}
+</div>
