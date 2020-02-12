@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Conversation;
+use App\Entity\Message;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
@@ -33,6 +34,26 @@ class ConversationRepository extends ServiceEntityRepository
 
             ->getQuery()
             ->getOneOrNullResult() // pour récupérer une seul conversation
+        ;
+    }
+
+    // /**
+    //  * @return ImagePost[] Returns an array of ImagePost objects
+    //  */
+    public function findConversationsById($userSenderId)
+    {
+        //13
+        return $this->createQueryBuilder('conversation')
+            ->andWhere('conversation.userReceiver = :user_receiver_id 
+            or conversation.userSender = :user_sender_id')
+            ->setParameters([
+                'user_receiver_id'=> $userSenderId,
+                'user_sender_id' => $userSenderId])
+            // ->leftJoin('Message', 'm', 'WITH', 'm.conversation.id = conversation.id')
+            // ->innerJoin('Namespace\YourBundle\Entity\Aq_skill', 'ac', 'WITH', 'ac.user_id = u.user_id'
+            //->orderBy('message.date_envoi', 'DESC')
+            ->getQuery()
+            ->getResult()
         ;
     }
     

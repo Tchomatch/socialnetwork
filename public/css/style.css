@@ -59,7 +59,7 @@
     display:    none;
     position:   fixed;
     z-index:    1000;
-    bottom:     0;
+    top:        0;
     left:       0;
     height:     100%;
     width:      100%;
@@ -68,7 +68,6 @@
                 50% 50% 
                 no-repeat;
 }
-
 
 body.loading .modal {
     overflow: hidden;   
@@ -82,4 +81,17 @@ body.loading .modal {
 
     width: 30%;
     z-index: 30;
+}
+/* agencement des contenus fixes */
+.maNavbar{
+    z-index : 10
+}
+
+.maSidebar {
+    height: 100vh;
+    z-index : 9;
+}
+
+.monFooter {
+    z-index : 10
 }

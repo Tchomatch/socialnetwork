@@ -104,7 +104,6 @@ class ChatController extends AbstractController
             'messages' => $msg,
             'userReceiver' => $userReceiver,
             
-            
         ]);
     }
 

@@ -33,8 +33,8 @@
 {% endblock %}
 {% block additionnalJS %}
     {# j'appelle ma fonction charger qui me sert a recharger mon chat toute les 5 secondes #}
-        <script src="/js/chat.js"></script>
-        <script> 
-            charger({{ userReceiver.id }});
-        </script>
+    <script src="/js/chat.js"></script>
+    <script> 
+        charger({{ userReceiver.id }});
+    </script>
 {% endblock %}
