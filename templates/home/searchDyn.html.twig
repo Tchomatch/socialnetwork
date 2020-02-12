@@ -1,13 +1,14 @@
+<div id="focus">
+    {% for userRechercher in usersRechercher %}
 
-{% for userRechercher in usersRechercher %}
+        <a class="userSearch  row" href="{{ path('profile_show', {'id': userRechercher.id}) }}">
+            <img class="imageUserHeader ml-1" src="{{asset('uploads/image/' ~ userRechercher.image)}}" alt="">
+            <h4 class="ml-3">{{userRechercher.pseudo}}</h4>
+        </a>
 
-    <a class="row headerChat mb-5" href="{{ path('profile_show', {'id': userRechercher.id}) }}">
-        <img class="imageUserHeader ml-1" src="{{asset('uploads/image/' ~ userRechercher.image)}}" alt="">
-        <h4 class="ml-3">{{userRechercher.pseudo}}</h4>
-    </a>
+    {% else  %}    
 
-{% else  %}    
+        <h1 class=" headerChat">Aucun utilisateur trouvé</h1>
 
-    <h1>Aucun utilisateur trouvé</h1>
-
-{% endfor %}
+    {% endfor %}
+</div>
