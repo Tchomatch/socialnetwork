@@ -20,14 +20,34 @@
 #george{
     display: none;
 }
+.msgIcon{
+   font-size: 2em;
+}
+.profileTitle{
+    margin-top: 55px;
+}
+.userSearch{
+    background-color: black;
+    border-bottom: 5px solid grey;
+    color: white;
+  
+}
+#searchDyn{
+    width: 60%;
+    position: fixed;
+    z-index: 50;
+}
 .headerChat{
     background-color: black;
     color: white;
+    
 }
 .imageChat{
     height: 200px;
     width: 200px;
+    
 }
+
 .imageUserChat{
     height:30px;
     width: 30px;
@@ -52,6 +72,8 @@
 }
 .chat{
     border: black solid 1px;
+    margin-bottom: 55px;
+    margin-top: 55px;
 }
 
 /* ajout de la modale de chargement scrollPost */
@@ -77,11 +99,7 @@ body.loading .modal {
     display: block;
 }
 
-#searchDyn{
 
-    width: 30%;
-    z-index: 30;
-}
 /* agencement des contenus fixes */
 .maNavbar{
     z-index : 10
@@ -94,4 +112,10 @@ body.loading .modal {
 
 .monFooter {
     z-index : 10
+}
+@media only screen and (max-width: 700px) {
+    .imageChat {
+        height: 100px;
+        width: 100px;
+    }
 }

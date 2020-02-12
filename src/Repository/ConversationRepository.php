@@ -49,9 +49,6 @@ class ConversationRepository extends ServiceEntityRepository
             ->setParameters([
                 'user_receiver_id'=> $userSenderId,
                 'user_sender_id' => $userSenderId])
-            // ->leftJoin('Message', 'm', 'WITH', 'm.conversation.id = conversation.id')
-            // ->innerJoin('Namespace\YourBundle\Entity\Aq_skill', 'ac', 'WITH', 'ac.user_id = u.user_id'
-            //->orderBy('message.date_envoi', 'DESC')
             ->getQuery()
             ->getResult()
         ;

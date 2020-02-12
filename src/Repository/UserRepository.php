@@ -40,7 +40,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     //  * @return User[] Returns an array of User objects
     //  */
     
-    // fonction qui me sert a trouver tous les user ayant le pseudo ou une partie du pseudo = contenu de l'input 
+    // fonction qui me sert a trouver tous les user ayant les lettres en communs avec celle qui on été entrer dans l'input  
     public function findUser($search, $limit = null)
     {
         return $this->createQueryBuilder('s')

@@ -4,7 +4,7 @@
 {% for conversation in conversations  %}
     <div class="container border my-3">
             
-            <p href="{{ path('chat', {'id' : userReceiver.id })}}">{{ conversation.id  }}</p> 
+            <p href="{{ path('chat', {'id' : conversation.userReceiver.id })}}">{{ conversation.id  }}</p> 
         </div>  
         {% endfor %}
 {% endblock %}
