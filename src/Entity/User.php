@@ -44,7 +44,7 @@ class User implements UserInterface
     private $pseudo;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $image;
 
@@ -173,6 +173,12 @@ class User implements UserInterface
 
     public function getImage(): ?string
     {
+        // j'attribue une image par defaut au cas où l'utilisateur n'en choississe pas
+        if($this->image == null) {
+
+            $image = "public/uploads/image/default.png";
+        }
+
         return $this->image;
     }
 

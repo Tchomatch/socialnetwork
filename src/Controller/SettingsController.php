@@ -68,6 +68,12 @@ class SettingsController extends AbstractController
 
             // j'enregistre les données en BDD
             $entityManager->flush();
+
+            // j'ajoute un message flash pour alerter le user
+            $this->addFlash(
+                'modif',
+                'Votre Profil a bien été modifié'
+            );
         }
 
         return $this->render('settings/index.html.twig', [
@@ -99,12 +105,13 @@ class SettingsController extends AbstractController
             
             $entityManager->persist($user);
             $entityManager->flush();
+
             // j'ajoute un message flash pour alerter le user
             $this->addFlash(
                 'modif', 'Votre Mot de passe a bien été modifié !'
             );
             } else {
-                $form->addError(new FormError('Votre ancient mot de passe est incorrect veuillez réessayer'));
+                $form->addError(new FormError('Votre ancien mot de passe est incorrect veuillez réessayer'));
             }
         }
 
