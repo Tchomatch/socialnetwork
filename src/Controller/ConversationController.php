@@ -22,10 +22,9 @@ class ConversationController extends AbstractController
         // Je récupère les conversations de cet utilisateur 
         $conversations = $conversationRepository->findConversationsById($user->getId());
 
-        dump($conversations);
-        
+        // dump($conversations);
 
-        // J'affiche ses conversations
+        // Je retourne ses conversations vers ma vue
         return $this->render('conversation/index.html.twig', [
             'conversations' => $conversations,
 

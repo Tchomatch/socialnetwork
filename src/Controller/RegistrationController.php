@@ -32,7 +32,7 @@ class RegistrationController extends AbstractController
 
             if ($file) {
                 
-                // Move the file to the directory where brochures are stored
+                // Déplacez le fichier dans le répertoire où les brochures sont stockées
             
                 $newFilename ='img_' . uniqid().'.'.$file->guessExtension();
                 try {
@@ -41,14 +41,14 @@ class RegistrationController extends AbstractController
                         $newFilename
                     );
                 } catch (FileException $e) {
-                    // ... handle exception if something happens during file upload
-                }                // updates the 'brochureFilename' property to store the jpg file name
-                // instead of its contents
+                    // ... gérer l'exception si quelque chose se produit pendant le téléchargement du fichier
+                }                // met à jour la propriété 'brochureFilename' pour stocker le nom du fichier jpg
+                // au lieu de son contenu
                 $user->setImage($newFilename);
             } else {
                 $user->setImage("default.png");
             }
-            // encode the plain password
+            // encoder le mot de passe simple
             $user->setPassword(
                 $passwordEncoder->encodePassword(
                     $user,
@@ -61,13 +61,13 @@ class RegistrationController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            // do anything else you need here, like send an email
+            // faites tout ce dont vous avez besoin ici, comme envoyer un e-mail
 
             return $guardHandler->authenticateUserAndHandleSuccess(
                 $user,
                 $request,
                 $authenticator,
-                'main' // firewall name in security.yaml
+                'main' // nom du pare-feu dans security.yaml
             );
 
             return $this->redirectToRoute('home');
