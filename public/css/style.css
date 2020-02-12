@@ -24,17 +24,34 @@
 #george{
     display: none;
 }
-
-
+.msgIcon{
+   font-size: 2em;
+}
+.profileTitle{
+    margin-top: 55px;
+}
+.userSearch{
+    background-color: black;
+    border-bottom: 5px solid grey;
+    color: white;
+  
+}
+#searchDyn{
+    width: 60%;
+    position: fixed;
+    z-index: 50;
+}
 .headerChat{
     background-color: black;
     color: white;
+    
 }
 
 
 .imageChat{
     height: 200px;
     width: 200px;
+    
 }
 
 
@@ -74,6 +91,8 @@
 
 .chat{
     border: black solid 1px;
+    margin-bottom: 55px;
+    margin-top: 55px;
 }
 
 
@@ -124,4 +143,10 @@ body.loading .modal {
 
 .monFooter {
     z-index : 10
+}
+@media only screen and (max-width: 700px) {
+    .imageChat {
+        height: 100px;
+        width: 100px;
+    }
 }

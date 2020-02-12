@@ -6,7 +6,7 @@
 {% block body %}
 
 	<div class="text-center mb-3">
-		<h1>Profile page</h1>
+		<h1 class="profileTitle">Profile page</h1>
 		{% for message in app.flashes('notice') %}
 
 			<p>{{ message }}</p>
@@ -23,22 +23,25 @@
 			    {{ user.pseudo }}</p>
 			</div>
 
-			<div class="col-4">
+			<div class="col-4 d-flex justify-content-center">
 				<img style="width:200px;height:200px;" src="{{ asset('uploads/image/' ~ user.image ) }}" alt="Image user's">
 			</div>
-
-			{% if user.information %}
-				<div class="col-3 border-left">
+			<div class="col-4 border-left">
+				{% if user.information %}
+					
 					<p>{{ user.information.nom }}<br>
 						{{ user.information.prenom }}<br>
 						{{ user.information.dateNaissance|date("d-m-Y") }}<br>
 						{{ user.information.adresse }}<br>
 						{{ user.information.ville }}<br>
 						{{ user.information.cp }}<br>
-						{{ user.information.description }}</p>
-				</div>
-			{% endif %}
-
+						{{ user.information.description }}
+					</p>
+					<br>
+				
+				{% endif %}
+				<a href="{{ path('chat', {'id': user.id}) }}"><i class="fas fa-comments msgIcon"></i></a>
+			</div>
 		</div>
 
 	</div>
@@ -66,6 +69,7 @@
                         <img class="pr-2" style="width:50px;height:50px;" src="{{ asset('uploads/image/' ~ user.image ) }}" alt="Image utilisateur">
                         <p>{{ user.pseudo }}</p>
                     </div>
+					
 
                     {% for image in affichagePost.imagePost %}
 

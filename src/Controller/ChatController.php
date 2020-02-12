@@ -23,9 +23,13 @@ class ChatController extends AbstractController
      */
     public function chat($id, Request $request, EntityManagerInterface $entityManager, UserRepository $userRepository, ConversationRepository $conversationRepository, MessageRepository $messageRepository)
     {
+        // $userReceiver est l'utilisateur avec qui je chat, je récupère son id dans l'url (l'autre)
         $userReceiver = $userRepository->find($id);
+        // $userSender représente l'utilisateur connecté sur son appareil (moi)
         $userSender = $this->getUser();
+        // je récupère l'id de l'utilisateur connecté (mon id) 
         $userSenderId = $userSender->getId();
+        // je récupère la conversation entre l'utilisateur connecté, sur son appareil,  avec un autre  (moi et l'autre)
         $conversation = $conversationRepository->findConv($id, $userSenderId);
 
         $message = new Message();
@@ -33,13 +37,16 @@ class ChatController extends AbstractController
         // je génère un formulaire pour pouvoir envoyer un message
         $form = $this->createForm(MessageType::class, $message);
 
-        // je recupere les données du form
+        // je recupere les données du formulaire message
         $form->handleRequest($request);
+        // je vérifie si une conversation entre les deux utilisateur existe si non (null) j'en crée une nouvelle
         if  ($conversation === null) {
         
             $conversation = new Conversation();
 
+            // je set l'utilisateur avec qui je suis dans la coonversation
             $conversation->setUserReceiver($userReceiver);
+            // je set l'utilisateur connectésur son appareil (moi)
             $conversation->setUserSender($userSender);
 
             // j'enregistre ma conversation dans ma BDD
@@ -48,7 +55,7 @@ class ChatController extends AbstractController
         }
         // si les données sont valides
         if ($form->isSubmitted() && $form->isValid()) {
-            // je vérifie si une conversation entre les deux utilisateur existe 
+            
             $message->setConversation($conversation);
             $message->setDateEnvoi(new \DateTime());
             $message->setUserSender($userSender);
@@ -117,6 +124,7 @@ class ChatController extends AbstractController
         $userSenderId = $userSender->getId();
         $conversation = $conversationRepository->findConv($id, $userSenderId);
 
+        // je récupère tous les messages lié a la conversation des 2 user
         $msg = $conversation->getMessages();
         
 
