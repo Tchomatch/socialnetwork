@@ -2,6 +2,7 @@
 
 {% block body %}
 {% if is_granted('IS_AUTHENTICATED_FULLY')%}
+    
 
 <div class="my-5">
     
@@ -47,5 +48,6 @@
 
 {% endblock %}
 {% block additionnalJS %}
-<script src="{{ asset('js/postScroll.js') }}"></script>
+    <script src="{{ asset('js/postScroll.js') }}"></script>
+
 {% endblock %}

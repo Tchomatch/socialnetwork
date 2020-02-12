@@ -77,3 +77,9 @@ body.loading .modal {
 body.loading .modal {
     display: block;
 }
+
+#searchDyn{
+
+    width: 30%;
+    z-index: 30;
+}

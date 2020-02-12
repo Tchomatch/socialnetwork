@@ -93,7 +93,7 @@ class ChatController extends AbstractController
                 $entityManager->flush();
             }
             
-        
+            return $this->redirectToRoute('chat', ['id' => $userReceiver->getId()]);
         } 
        
         $msg = $conversation->getMessages();

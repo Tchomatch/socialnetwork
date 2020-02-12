@@ -6,6 +6,7 @@ use App\Repository\PostRepository;
 use App\Repository\UserRepository;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 
 class HomeController extends AbstractController
 {
@@ -24,5 +25,40 @@ class HomeController extends AbstractController
 
     }
 
+    /**
+     * @Route("/search", name="search")
+     */
+    public function search(UserRepository $userRepo, Request $request)
+    {
+        
+        $contentSearch = $request->get('search');
+        $searchUsers= $userRepo->findUser($contentSearch);
+        // condition pour afficher aucun utilisateur lorsque mon input est vide
+        if (empty($contentSearch)){
+            $searchUsers = [];
+        }
+        return $this->render('home/search.html.twig', [
+            'usersRechercher' => $searchUsers,
+        ]);
 
+    }
+
+   
+    /**
+     * @Route("/search2", name="search2")
+     */
+    public function search2(UserRepository $userRepo, Request $request)
+    {
+        
+        $contentSearch = $request->get('search');
+        $searchUsers= $userRepo->findUser($contentSearch);
+        
+        return $this->render('home/searchDyn.html.twig', [
+            'usersRechercher' => $searchUsers,
+        ]);
+
+    }
+
+   
 }
+

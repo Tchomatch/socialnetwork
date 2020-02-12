@@ -30,21 +30,11 @@ class ConversationRepository extends ServiceEntityRepository
             ->setParameters([
                 'user_receiver_id'=> $id,
                 'user_sender_id' => $userSenderId])
+
             ->getQuery()
             ->getOneOrNullResult() // pour récupérer une seul conversation
         ;
     }
     
 
-    /*
-    public function findOneBySomeField($value): ?Conversation
-    {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

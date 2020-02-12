@@ -17,7 +17,7 @@
         <div class="col-5 {{classType}}  ">
             <div class="row">
                 {# je récupère l'image de profile du user qui envoie le message et le pseudo de ce user  #}
-                <img class="imageUserChat ml-1" src="{{message.userSender.image}}" alt="">
+                <img class="imageUserChat ml-1" src="{{asset('uploads/image/' ~ message.userSender.image)}}" alt="">
                 <h6 class="ml-1">{{message.userSender.pseudo}}</h6>
             </div>
             {# j'affiche le contenu du message #}

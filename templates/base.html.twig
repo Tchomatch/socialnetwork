@@ -22,8 +22,8 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav mr-auto">
                 {% if is_granted('IS_AUTHENTICATED_FULLY')%}
-                <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <form class="form-inline my-2 my-lg-0" action="{{ path('search')}}" method="post">
+                    <input class="form-control mr-sm-2" type="search" placeholder="rechercher" aria-label="Search" name="search" id="search">
                     <button class="btn btn-outline-light my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
                 </form>
                 {% else %}
@@ -37,8 +37,15 @@
             </ul>
         </div>
     </nav>
+   
     {% endblock %}
-    
+
+
+    <div id="searchDyn"  class="searchDyn">
+
+    </div>
+
+
     <main class="container py-md-5">
         {% block body %}{% endblock %}
     </main>
@@ -64,6 +71,12 @@
     <script type="text/javascript" src="/js/fontawesome/all.min.js"></script>
     <script type="text/javascript" src="/js/bootstrap/bootstrap.min.js"></script>
     {% endblock %}
-    {% block additionnalJS %}{% endblock %}
+    {% block additionnalJS %} 
+       
+        <script src="/js/search.js"></script>
+        <script> 
+            searchDyn();
+        </script> 
+    {% endblock %}
 </body>
 </html>
