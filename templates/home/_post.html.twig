@@ -1,0 +1,25 @@
+{# ce template de post sera chargé dans la boucle présente dans les fichiers index et load #}
+    <div class="container border my-3">
+        <div class="row p-3">
+            <img class="pr-2" style="width:50px;height:50px;" src="{{ asset('uploads/image/' ~ post.user.image ) }}" alt="Image user's">
+            <p>{{ post.user.pseudo }}</p> 
+        </div>
+        
+        {% for image in post.imagePost %}
+        <img style="width:100px;height:100px;" src="{{ asset('uploads/image/' ~ image.image ) }}" alt="">        
+        {% endfor %}
+        
+        <div class="row">
+            <div class="container">
+                <p>{{ post.contenu }}</p>
+                <small class="float-right mt-2">{{ post.datepost|date("d-m-Y H-i-s") }}</small>
+            </div>
+            
+        </div>
+        
+        {# <div class="container col-2 d-flex flex-column justify-content-around">
+            <button class="btn btn-sm btn-danger">Supprimer</button>
+            <button class="btn btn-sm btn-primary">Modifier</button>
+        </div>      #}
+    </div>
+  
