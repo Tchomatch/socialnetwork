@@ -6,7 +6,7 @@
 {% block body %}
 
 	<div class="text-center mb-3">
-		<h1>Profile page</h1>
+		<h1 class="profileTitle">Profile page</h1>
 		{% for message in app.flashes('notice') %}
 
 			<p>{{ message }}</p> {# Affichage message flash de suppression #}
@@ -35,10 +35,13 @@
 						{{ user.information.adresse }}<br>
 						{{ user.information.ville }}<br>
 						{{ user.information.cp }}<br>
-						{{ user.information.description }}</p>
-				</div>
-			{% endif %}
-
+						{{ user.information.description }}
+					</p>
+					<br>
+				
+				{% endif %}
+				<a href="{{ path('chat', {'id': user.id}) }}"><i class="fas fa-comments msgIcon"></i></a>
+			</div>
 		</div>
 
 	</div>
@@ -69,6 +72,7 @@
                         <img class="pr-2" style="width:50px;height:50px;" src="{{ asset('uploads/image/' ~ user.image ) }}" alt="Image utilisateur">
                         <p>{{ user.pseudo }}</p>
                     </div>
+					
 
                     {% for image in affichagePost.imagePost %} {# Affichage des images #}
 

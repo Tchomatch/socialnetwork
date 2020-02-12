@@ -1,4 +1,7 @@
-
+/* Modification d'une classe bootstrap pour changer le texte du bouton, utilisée dans :
+    - registration
+    - settings
+ */
 .custom-file-label::after {
     position: absolute;
     top: 0;
@@ -17,42 +20,81 @@
     border-radius: 0 .25rem .25rem 0;
 }
 
+
 #george{
     display: none;
+}
+.msgIcon{
+   font-size: 2em;
+}
+.profileTitle{
+    margin-top: 55px;
+}
+.userSearch{
+    background-color: black;
+    border-bottom: 5px solid grey;
+    color: white;
+  
+}
+#searchDyn{
+    width: 60%;
+    position: fixed;
+    z-index: 50;
 }
 .headerChat{
     background-color: black;
     color: white;
+    
 }
+
+
 .imageChat{
     height: 200px;
     width: 200px;
+    
 }
+
+
+/* classe pour définir la taille des images, utilisée dans :
+    - conversations
+    - chat
+*/
 .imageUserChat{
     height:30px;
     width: 30px;
     border-radius: 20px;
 }
+
+
 .msgSend{
     background-color: green;
     color: azure;
     border: black solid 1px;
     border-radius: 20px;
 }
+
+
 .msgRec{
     background-color: black;
     color: azure;
     border: black solid 1px;
     border-radius: 20px;
 }
+
+
 .imageUserHeader{
     height:50px;
     width: 50px;
     border-radius: 50%;
 }
+
+
 .chat{
     border: black solid 1px;
+    margin-bottom: 55px;
+    margin-top: 55px;
 }
+
 
 /* ajout de la modale de chargement scrollPost */
 .modal {
@@ -69,29 +111,42 @@
                 no-repeat;
 }
 
+
 body.loading .modal {
     overflow: hidden;   
 }
 
+
 body.loading .modal {
     display: block;
 }
+
 
 #searchDyn{
 
     width: 30%;
     z-index: 30;
 }
+
+
 /* agencement des contenus fixes */
 .maNavbar{
     z-index : 10
 }
+
 
 .maSidebar {
     height: 100vh;
     z-index : 9;
 }
 
+
 .monFooter {
     z-index : 10
+}
+@media only screen and (max-width: 700px) {
+    .imageChat {
+        height: 100px;
+        width: 100px;
+    }
 }

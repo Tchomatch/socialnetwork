@@ -29,8 +29,9 @@ class HomeController extends AbstractController
      */
     public function search(UserRepository $userRepo, Request $request)
     {
-        
+        // je récupère le contenu de ma barre de recherche avec le name de mon input
         $contentSearch = $request->get('search');
+        // j'éxécute me requete qui me récupère tout les user lié a la recherche par leur pseudo
         $searchUsers= $userRepo->findUser($contentSearch);
         // condition pour afficher aucun utilisateur lorsque mon input est vide
         if (empty($contentSearch)){
@@ -48,10 +49,14 @@ class HomeController extends AbstractController
      */
     public function search2(UserRepository $userRepo, Request $request)
     {
+        // nouvelle route pour nouvelle page pour ma barre de recherche dynamique 
         
         $contentSearch = $request->get('search');
-        $searchUsers= $userRepo->findUser($contentSearch);
-        
+        // sur mon affichage dynamique je lui renseigne une limite pour ne pas m'afficher tous les user lié a la recherche
+        $searchUsers= $userRepo->findUser($contentSearch, 3);
+        if (empty($contentSearch)){
+            $searchUsers = [];
+        }
         return $this->render('home/searchDyn.html.twig', [
             'usersRechercher' => $searchUsers,
         ]);

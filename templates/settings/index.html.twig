@@ -9,15 +9,25 @@
 
     <div class="mt-5 mb-5 pb-3 col-xs-12 col-md-10 offset-md-2">
         
+        {# Ici j'affiche les informations que l'utilisateur à déjà rentrées à l'inscription #}
         <h1>Informations initiales</h1>
             {{ form_start(form) }}
             {{ form_end(form) }}
-        
+
+        {# affichage de mon message en cas de modification du profil #}
+        {% for message in app.flashes('modif') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        {# Et ici j'affiche les informations qu'il a ou qu'il peut rajouter si il le souhaite #}
         <h1>Informations supplémentaires</h1>
             {{ form_start(form2) }}
             {{ form_end(form2) }}
+    </div>
+
     
-    </div>            
 
 </div>
 {% endblock %}

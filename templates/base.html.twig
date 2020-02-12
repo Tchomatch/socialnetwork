@@ -47,10 +47,13 @@
    
     {% endblock %}
 
+    <div class="container ">
+        <div id="searchDyn" >
 
-    <div id="searchDyn"  class="searchDyn">
-
+        </div>
+    
     </div>
+    
 
     <main class="container-fluid">
     
@@ -77,11 +80,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script type="text/javascript" src="/js/fontawesome/all.min.js"></script>
     <script type="text/javascript" src="/js/bootstrap/bootstrap.min.js"></script>
-    <script type="text/javascript" src="/js/main.js"></script>
+    <script type="text/javascript" src="/js/main.js"></script> 
+    <script src="/js/search.js"></script>
     {% endblock %}
-    {% block additionnalJS %} 
-       
-        <script src="/js/search.js"></script>
+    {% block searchBarJS %} 
         <script> 
             searchDyn();
         </script> 

@@ -26,7 +26,10 @@
             {# j'affiche le ou les images lié au message  #}
             {% for image in message.imageChats %}
             
-            <img class="imageChat" src="{{asset('uploads/image/' ~ image.image)}}" alt="">
+            {# je crée un lien vers mon image en taille réelle sur mon iage réduite dans mon message #}
+           
+                <img class="imageChat" src="{{asset('uploads/image/' ~ image.image)}}" alt="">
+            
             {% endfor %} <br>
             {# j'affiche la date d'envoie du message #}
             <small>envoyer le : {{message.dateEnvoi|date('d/m/Y H:i:s')}}</small>
