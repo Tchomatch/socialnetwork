@@ -9,7 +9,7 @@
 		<h1>Profile page</h1>
 		{% for message in app.flashes('notice') %}
 
-			<p>{{ message }}</p>
+			<p>{{ message }}</p> {# Affichage message flash de suppression #}
 
 		{% endfor %}
 	</div>
@@ -18,16 +18,16 @@
 
 		<div class="row">
 
-			<div class="col-4 border-right">
+			<div class="col-4 border-right"> {# Affichage des informations d'inscription #}
 				<p>{{ user.email }}<br>
 			    {{ user.pseudo }}</p>
 			</div>
 
-			<div class="col-4">
+			<div class="col-4">{# Affichage de la photo #}
 				<img style="width:200px;height:200px;" src="{{ asset('uploads/image/' ~ user.image ) }}" alt="Image user's">
 			</div>
 
-			{% if user.information %}
+			{% if user.information %}{# Affichage des informations complémentaires #}
 				<div class="col-3 border-left">
 					<p>{{ user.information.nom }}<br>
 						{{ user.information.prenom }}<br>
@@ -45,10 +45,13 @@
 
 	{% if userConnect == user %}
 
-		<div class="container">
+		<div class="container">{# Affichage formulaire post #}
 			<button onclick="myDisplay()" class="btn btn-primary mb-2">+</button>
 			<div id="george">
-				{{ form(addPost) }}
+				{{ form_start(addPost) }}
+					{{ form_row(addPost.image) }}
+					{{ form_row(addPost.contenu) }}
+				{{ form_end(addPost) }}
 			</div>
 		</div>
 
@@ -56,18 +59,18 @@
 
 	{% if affichagePosts %}
 
-        {% for affichagePost in affichagePosts %}
+        {% for affichagePost in affichagePosts %}{# Boucle pour post #}
 
             {% if affichagePost.user == user %}
 
-                <div class="container border">
+                <div class="container border mb-2">
 
                     <div class="row p-3">
                         <img class="pr-2" style="width:50px;height:50px;" src="{{ asset('uploads/image/' ~ user.image ) }}" alt="Image utilisateur">
                         <p>{{ user.pseudo }}</p>
                     </div>
 
-                    {% for image in affichagePost.imagePost %}
+                    {% for image in affichagePost.imagePost %} {# Affichage des images #}
 
                         <img style="width:100px;height:100px;" src="{{ asset('uploads/image/' ~ image.image ) }}" alt="">
 
@@ -75,15 +78,17 @@
 
                     <div class="row">
 
-                        <div class="container col-8">
+                        <div class="container col-8"> {# Affichage du contenue et de la date #}
                             <p>{{ affichagePost.contenu }}</p>
-                            <small>{{ affichagePost.datepost|date("d-m-Y H-i-s") }}</small>
+                            <small>{{ affichagePost.datepost|date("d-m-Y H:i:s") }}</small>
                         </div>
 
-                        {% if userConnect == user %}
+                        {% if userConnect == user %}{# Seul l'utilisateur peut modifier son post #}
                             <div class="container col-3 d-flex flex-column justify-content-around">
                                 <a class="btn btn-primary mb-1" href="{{ path('post_edit', {'id': affichagePost.id}) }}">Modification</a>
-                                {% include 'profile/_delete_form.html.twig' %}
+						{% endif %}
+						{% if userConnect == user or is_granted('ROLE_ADMIN') %}{# Si l'utilisateur est le celui qui post ou si il y est admin #}
+                                {% include 'profile/_delete_form.html.twig' %}{# Alors on peut supprimer #}
                             </div>
                         {% endif %}
 

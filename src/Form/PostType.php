@@ -16,7 +16,7 @@ class PostType extends AbstractType
     {
         $builder
         ->add('image', FileType::class, [
-                
+            
             'label' => 'Image (fichier)',                // non mappé signifie que ce champ n'est associé à aucune propriété d'entité
             'multiple' => true,
             'mapped' => false,                // rendez-le facultatif pour ne pas avoir à télécharger à nouveau le fichier PDF
