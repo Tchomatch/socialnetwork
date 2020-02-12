@@ -104,7 +104,6 @@ class ChatController extends AbstractController
             'messages' => $msg,
             'userReceiver' => $userReceiver,
             
-            
         ]);
     }
 
@@ -114,7 +113,7 @@ class ChatController extends AbstractController
     public function messages($id, UserRepository $userRepository, ConversationRepository $conversationRepository)
     {
         $userReceiver = $userRepository->find($id);
-        $userSender =  $userRepository->find(3); // $this->getUser()
+        $userSender = $userRepository->find(3); // $this->getUser()
         $userSenderId = $userSender->getId();
         $conversation = $conversationRepository->findConv($id, $userSenderId);
 

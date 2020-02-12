@@ -50,6 +50,7 @@
         {% block body %}{% endblock %}
     </main>
     {% block footer %}
+<<<<<<< HEAD
     <footer class="monFooter">
         {% if is_granted('IS_AUTHENTICATED_FULLY')%}
         <div class="row fixed-bottom bg-dark text-light d-flex justify-content-center align-items-center">
@@ -66,6 +67,22 @@
         </div>
         {% endif %}
     </footer>
+=======
+    {% if is_granted('IS_AUTHENTICATED_FULLY')%}
+    <div class="row fixed-bottom bg-dark text-light d-flex justify-content-center align-items-center">
+        <section class="col-3 d-flex justify-content-center align-items-center p-2"><a href="{{ path('home') }}"><i class="fas text-light fa-3x fa-home"></i></a></section>
+        <section class="col-3 d-flex justify-content-center align-items-center p-2"><a href="{{ path('profile_show') }}"><i class="fas text-light fa-3x fa-user"></i></a></section>
+        <section class="col-3 d-flex justify-content-center align-items-center p-2"><a href="{{ path('conversation') }}"><i class="fas text-light fa-3x fa-comments"></i></a></section>
+        <section class="col-3 d-flex justify-content-center align-items-center p-2"><a href="{{ path('settings') }}"><i class="fas text-light fa-3x fa-user-cog"></i></a></section>
+    </div>
+    {% else %}
+    <div class="row fixed-bottom bg-dark text-light d-flex justify-content-center align-items-center">
+        <section class="welcomeMessage text-center d-flex align-items-center">
+            <h1>Bienvenue sur #HenriettO</h1>
+        </section>
+    </div>
+    {% endif %}
+>>>>>>> d4195449a97ac30373f48cc9c3da75df3d9a27c3
     {% endblock %}
     {% block javascripts %}
     <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>

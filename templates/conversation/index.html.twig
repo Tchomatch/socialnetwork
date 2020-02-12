@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+{% for conversation in conversations  %}
+    <div class="container border my-3">
+            
+            <p href="{{ path('chat', {'id' : userReceiver.id })}}">{{ conversation.id  }}</p> 
+        </div>  
+        {% endfor %}
+{% endblock %}
