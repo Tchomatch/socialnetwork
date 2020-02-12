@@ -30,6 +30,8 @@
     </div>
     
     {# j'appelle ma fonction charger qui me sert a recharger mon chat toute les 5 secondes #}
+{% endblock %}
+{% block additionnalJS %}
     <script src="/js/chat.js"></script>
     <script> 
         charger({{ userReceiver.id }});
