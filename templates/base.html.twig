@@ -47,7 +47,7 @@
     <div class="row fixed-bottom bg-dark text-light d-flex justify-content-center align-items-center">
         <section class="col-3 d-flex justify-content-center align-items-center p-2"><a href="{{ path('home') }}"><i class="fas text-light fa-3x fa-home"></i></a></section>
         <section class="col-3 d-flex justify-content-center align-items-center p-2"><a href="{{ path('profile_show') }}"><i class="fas text-light fa-3x fa-user"></i></a></section>
-        <section class="col-3 d-flex justify-content-center align-items-center p-2"><a href="{#{{ path('conversations') }}#}"><i class="fas text-light fa-3x fa-comments"></i></a></section>
+        <section class="col-3 d-flex justify-content-center align-items-center p-2"><a href="{{ path('conversation') }}"><i class="fas text-light fa-3x fa-comments"></i></a></section>
         <section class="col-3 d-flex justify-content-center align-items-center p-2"><a href="{{ path('settings') }}"><i class="fas text-light fa-3x fa-user-cog"></i></a></section>
     </div>
     {% else %}
