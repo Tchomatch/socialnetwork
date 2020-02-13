@@ -18,7 +18,7 @@
             <div class="row">
                 {# je récupère l'image de profile du user qui envoie le message et le pseudo de ce user  #}
                 <img class="imageUserChat ml-1" src="{{asset('uploads/image/' ~ message.userSender.image)}}" alt="">
-                <h6 class="ml-1">{{message.userSender.pseudo}}</h6>
+                <h6 class="ml-1 text-dark">{{message.userSender.pseudo}}</h6>
             </div>
             {# j'affiche le contenu du message #}
             <h4 class="contenuAntiDebordement">{{message.contenu}}</h4>

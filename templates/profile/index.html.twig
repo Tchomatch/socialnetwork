@@ -62,18 +62,18 @@
 
 	{% endif %}
 
-	<div class="afficher-post-entier">
+	<div class="afficher-post-entier ">
 		{% if affichagePosts %} 
 
 			{% for affichagePost in affichagePosts %}{# Boucle pour post #}
 
 				{% if affichagePost.user == user %}{# afficher les postes de l'utilisateur #}
 
-					<div class="container border mb-2">
+					<div class="container border mb-2 text-light bg-dark">
 
 						<div class="row p-3">
 							<img class="pr-2" style="width:50px;height:50px;" src="{{ asset('uploads/image/' ~ user.image ) }}" alt="Image utilisateur">
-							<p>{{ user.pseudo }}</p>
+							<p class="colorPseudo">{{ user.pseudo }}</p>
 						</div>
 
 						{% for image in affichagePost.imagePost %} {# Affichage des images #}
