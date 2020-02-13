@@ -37,7 +37,9 @@ class PostType extends AbstractType
         
         ])
         ->add('contenu')
-        ->add('Enregistrer', SubmitType::class)
+        ->add('Enregistrer', SubmitType::class, [
+            'attr' => ['class'=> 'btn-warning']
+        ])
         ;
     }
 
