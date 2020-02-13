@@ -17,30 +17,33 @@ class ChangePasswordType extends AbstractType
         $builder
         ->add('oldPassword', PasswordType::class, array(
             'mapped' => false
-        ))
-        ->add('newPassword', RepeatedType::class, array(
-            'type' => PasswordType::class,
-            'invalid_message' => 'Les deux mots de passe doivent être identiques',
-            'options' => array(
-                'attr' => array(
-                    'class' => 'password-field'
-                )
-            ),
-            'required' => true, 
-            'mapped' => false 
-        ))
-        ->add('submit', SubmitType::class, array(
-            'attr' => array(
-                'class' => 'btn btn-primary btn-block'
-            )
-        ))
-    ;
-    }
-
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        $resolver->setDefaults([
-            'data_class' => User::class,
-        ]);
-    }
-}
+            ))
+            ->add('newPassword', RepeatedType::class, array(
+                'type' => PasswordType::class,
+                'first_options'  => ['label' => 'Mot de passe'],
+                'second_options' => ['label' => 'Repettez le mot de passe'],
+                'invalid_message' => 'Les deux mots de passe doivent être identiques',
+                'options' => array(
+                    'attr' => array(
+                        'class' => 'password-field'
+                        )
+                    ),
+                    'required' => true, 
+                    'mapped' => false 
+                    ))
+                    ->add('submit', SubmitType::class, array(
+                        'attr' => array(
+                            'class' => 'btn btn-warning'
+                            )
+                            ))
+                            ;
+                        }
+                        
+                        public function configureOptions(OptionsResolver $resolver)
+                        {
+                            $resolver->setDefaults([
+                                'data_class' => User::class,
+                                ]);
+                            }
+                        }
+                        

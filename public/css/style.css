@@ -18,6 +18,10 @@
     justify-content: center;
 }
 
+.centrage-profile {
+    border-right: 1px solid #6C757D;
+}
+
 .contenuAntiDebordement{
     word-wrap: break-word;
 }
@@ -179,20 +183,23 @@ body.loading .animLoad {
     z-index : 100;
     
 }
-@media only screen and (max-width: 700px) {
+
+@media screen and (max-width: 768px) {
     .imageChat {
         height: 100px;
         width: 100px;
     }
-}
 
-@media screen and (max-width: 768px) {
-    .maSidebar {
-        
+    .maSidebar {    
         height: 8vh;
     }
-}
 
+<<<<<<< HEAD
 @media only screen and (max-width: 576px){
     
+=======
+    .centrage-profile{
+        border-right: none;
+    }
+>>>>>>> c9aae222c83373681ae160b91fe75bf21a3313f9
 }
