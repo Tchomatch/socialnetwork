@@ -17,7 +17,7 @@
 
 		<div class="row">
 
-			<div class="col-md-4 col-sm-12 border-right mb-2 centrage-profile"> {# Affichage des informations d'inscription #}
+			<div class="col-md-4 col-sm-12 mb-2 centrage-profile"> {# Affichage des informations d'inscription #}
 				<p>{{ user.email }}<br>
 			    {{ user.pseudo }}</p>{# Affichage de la possibilite d'une conversation #}
 				<a href="{{ path('chat', {'id': user.id}) }}"><i class="fas fa-comments msgIcon"></i></a>
@@ -28,7 +28,7 @@
 			</div>
 
 			{% if user.information %}{# Affichage des informations complémentaires #}
-				<div class="col-md-4 col-sm-12 border-left centrage-profile">
+				<div class="col-md-4 col-sm-12">
 					<p>Nom: {{ user.information.nom }}<br>
 						Prénom: {{ user.information.prenom }}<br>
 						Date de naissance: {{ user.information.dateNaissance|date("d-m-Y") }}<br>
