@@ -5,29 +5,25 @@
 
 {% block body %}
 
+
+<div class="container">
 	<form method="post">
 		{% if error %}
-			<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+		<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
 		{% endif %}
-
-		{% if app.user %}
-			<div class="mb-3">
-				Vous êtes connecté avec
-				{{ app.user.username }},
-				<a href="{{ path('app_logout') }}">Déconnexion</a>
-			</div>
-		{% endif %}
-		<div class="row d-flex justify-content-center mt-5 pt-5">
-			<div class="col-6 d-flex flex-column align-items-center">
+		
+		<div class="row signForm d-flex justify-content-center align-items-center">
+			<div class="col-xs-12 col-md-6 d-flex flex-column align-items-center">
 				<h1 class="h3 mb-3 font-weight-normal">Connexion</h1>
 				<label for="inputEmail">Email</label>
 				<input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" required autofocus>
 				<label for="inputPassword">Mot de passe</label>
 				<input type="password" name="password" id="inputPassword" class="form-control" required>
-
+				
 				<input
 				type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 				{#
+<<<<<<< HEAD
                     Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
                     See https://symfony.com/doc/current/security/remember_me.html
             
@@ -41,8 +37,25 @@
 				<button class="btn btn-lg btn-secondary" type="submit">
 					Connexion
 				</button>
+=======
+					Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+					See https://symfony.com/doc/current/security/remember_me.html
+					
+					<div class="checkbox mb-3">
+						<label>
+							<input type="checkbox" name="_remember_me"> Remember me
+						</label>
+					</div>
+					#}
+					<hr>
+					<button class="btn btn-lg btn-primary" type="submit">
+						Connexion
+					</button>
+				</div>
+>>>>>>> df122885934196c809162fcd32c398d1810c75cd
 			</div>
-		</div>
-	</form>
-
-{% endblock %}
+		</form>
+	</div>
+	
+	{% endblock %}
+	

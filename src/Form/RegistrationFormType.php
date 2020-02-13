@@ -38,9 +38,7 @@ class RegistrationFormType extends AbstractType
                 // Ajout de contraintes sur l'import du type de fichier pour les images
                 'constraints' => [
                     new File([
-                        // contrainte de taille
-                        'maxSize' => '1024k',
-                        // contrainte du type de fichier
+                        'maxSize' => '10024k',
                         'mimeTypes' => [
                             'image/gif', 
                             'image/png',

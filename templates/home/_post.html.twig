@@ -1,11 +1,11 @@
 {# ce template de post sera chargé dans la boucle présente dans les fichiers index et load #}
-    <div class="container border my-3">
+    <div class="container rounded my-3 bg-dark text-light">
         
             <div class="row p-3">
                 {# rend le pseudo et l'image cliquable pour renvoyer sur le profil de l'auteur du post #}
-                <a href="{{path('profile_show', {'id': post.user.id}) }}">
+                <a class="text-light d-flex align-items-center" href="{{path('profile_show', {'id': post.user.id}) }}">
                     <img class="pr-2" style="width:50px;height:50px;" src="{{ asset('uploads/image/' ~ post.user.image ) }}" alt="Image user's">
-                    <p>{{ post.user.pseudo }}</p> 
+                    <p class="">{{ post.user.pseudo }}</p> 
                 </a>
             </div>
         
@@ -16,7 +16,7 @@
         {% endfor %}
         
         <div class="row">
-            <div class="container">
+            <div class="container contenuAntiDebordement">
                 <p>{{ post.contenu }}</p>
                 <small class="float-right mt-2">{{ post.datepost|date("d-m-Y H:i:s") }}</small>
             </div>

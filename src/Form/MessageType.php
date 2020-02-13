@@ -18,9 +18,11 @@ class MessageType extends AbstractType
             ->add('contenu')
             ->add('image', FileType::class, [
                 'multiple' => true,
-                'label' => 'Image (fichier jpeg/png/gif/pdf)',
+                'label' => 'Image (fichier, image)',
+                // unmapped means that this field is not associated to any entity property
                 'mapped' => false,
                 'required' => false,
+            
             ])
             ->add ('Envoyer', SubmitType::class);
     }

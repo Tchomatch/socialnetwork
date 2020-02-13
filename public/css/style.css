@@ -1,53 +1,60 @@
 /* Modification d'une classe bootstrap pour changer le texte du bouton, utilisée dans :
-    - registration
-    - settings
- */
-.custom-file-label::after {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 3;
-    display: block;
-    height: calc(1.5em + .75rem);
-    padding: .375rem .75rem;
-    line-height: 1.5;
-    color: #495057;
-    content: "Parcourir";
-    background-color: #e9ecef;
-    border-left: inherit;
-        border-left-color: inherit;
-    border-radius: 0 .25rem .25rem 0;
+- registration
+- settings
+*/
+
+#main {
+    background-color: #e0e0e0;
 }
 
+.custom-file-label::after {
+    content: "Parcourir";
+}
 
-#george{
+.centrage-profile{ /* centrer et aligner correctement la présentation du profile */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.contenuAntiDebordement{
+    word-wrap: break-word;
+}
+
+.afficher-post-entier{ /* Afficher le post entier pour le faire sortir de sous le footer */
+    margin-bottom: 70px;
+}
+
+#toggle-post{ /* Toggle pour les posts de profile */
     display: none;
 }
 .msgIcon{
-   font-size: 2em;
+    font-size: 2em;
 }
-.profileTitle{
-    margin-top: 55px;
-}
+
 .userSearch{
     background-color: black;
     border-bottom: 5px solid grey;
     color: white;
-  
+    
 }
-#searchDyn{
-    width: 60%;
+
+/* style pour barre et résultat de recherche */
+#focus{
+    width: 80%;
     position: fixed;
     z-index: 50;
 }
+
+/* style du header dans le chat */
 .headerChat{
     background-color: black;
     color: white;
     
 }
 
-
+/* je redimensionne les images envoyées en message */
 .imageChat{
     height: 200px;
     width: 200px;
@@ -56,8 +63,8 @@
 
 
 /* classe pour définir la taille des images, utilisée dans :
-    - conversations
-    - chat
+- conversations
+- chat
 */
 .imageUserChat{
     height:30px;
@@ -65,73 +72,98 @@
     border-radius: 20px;
 }
 
+/* définition du style des messages envoyés
+ */
 
 .msgSend{
-    background-color: green;
+    background-color: #F7971B;
     color: azure;
-    border: black solid 1px;
     border-radius: 20px;
 }
 
-
+/* définition du style des messages recus */
 .msgRec{
     background-color: black;
     color: azure;
-    border: black solid 1px;
     border-radius: 20px;
 }
+.contenuAntiDebordement{
+    word-wrap: break-word;
+}
 
-
+/* je redimensionne l'image de profil dans le header du chat */
 .imageUserHeader{
     height:50px;
     width: 50px;
     border-radius: 50%;
 }
 
-
+/* style du chat: bordure, marge... */
 .chat{
     border: black solid 1px;
     margin-bottom: 55px;
-    margin-top: 55px;
+   
 }
-
-
+.colorMsg{
+    color: white;
+}
+.colorPseudo{
+    color: #F7971B;
+}
 /* ajout de la modale de chargement scrollPost */
-.modal {
+.animLoad {
     display:    none;
     position:   fixed;
     z-index:    1000;
-    top:        0;
-    left:       0;
-    height:     100%;
-    width:      100%;
-    background: rgba( 255, 255, 255, .8 ) 
-                url('../uploads/image/ajax-loader.gif') 
-                50% 50% 
-                no-repeat;
+    bottom:     10vh;
+    right:      50vw;
+    height:     32px;
+    width:      32px;
+    border-radius: 30%;
+    background: rgba( 255, 255, 255, .2 ) 
+    url('../uploads/image/ajax-loader.gif') 
+    50% 50% 
+    no-repeat;
 }
 
 
-body.loading .modal {
+
+body.loading .animLoad {
     overflow: hidden;   
 }
 
 
-body.loading .modal {
+body.loading .animLoad {
     display: block;
+    position: fixed;
+}
+
+.signForm {
+    height : 80vh;
 }
 
 
 #searchDyn{
-
+    
     width: 30%;
     z-index: 30;
+}
+
+.maNavbar a i, .mesIconesFooter {
+    color: #f7971b;
+    
+}
+
+.custom-toggler .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(247, 151, 27)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
 }
 
 
 /* agencement des contenus fixes */
 .maNavbar{
     z-index : 100;
+    
+    
 }
 
 
@@ -145,7 +177,7 @@ body.loading .modal {
 
 .monFooter {
     z-index : 100;
-    height: 12vh;
+    
 }
 @media only screen and (max-width: 700px) {
     .imageChat {
@@ -159,4 +191,8 @@ body.loading .modal {
         
         height: 8vh;
     }
+}
+
+@media only screen and (max-width: 576){
+    
 }

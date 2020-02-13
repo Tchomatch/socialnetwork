@@ -33,6 +33,6 @@ class LoginController extends AbstractController
      */
     public function logout()
     {
-        throw new \Exception('This method can be blank - it will be intercepted by the logout key on your firewall');
+        //la fonction logout peut rester vide pour fonctionner et elle nous redirige vers la page renseigné dans le security.yaml avec le target
     }
 }
