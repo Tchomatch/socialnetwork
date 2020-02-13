@@ -5,18 +5,18 @@
     <title>{% block title %}#HenriettO{% endblock %}</title>
     {% block stylesheets %}
     
-    <link rel="stylesheet" href="/css/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap/bootstrap.css">
     <link rel="stylesheet" href="/css/fontawesome/all.min.css">
     <link rel="stylesheet" href="/css/style.css">
     
     {% endblock %}
 </head>
-<body>
+<body id="main">
     
     {% block header %}
-    <nav class="maNavbar navbar {#fixed-top#} navbar-expand-md navbar-dark bg-dark">
+    <nav class="maNavbar navbar-dark navbar navbar-expand-md bg-dark">
     <a class="navbar-brand" href="{{ path('home') }}">#HenriettO</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="custom-toggler navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -24,9 +24,9 @@
                 {% if is_granted('IS_AUTHENTICATED_FULLY')%}
                 <form class="form-inline my-2 my-lg-0" action="{{ path('search')}}" method="post">
                     <input class="form-control mr-sm-2" type="search" placeholder="rechercher" aria-label="Search" name="search" id="search">
-                    <button class="btn btn-outline-light my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
+                    <button class="btn btn-outline-warning my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
                     <label for="" class="ml-4 text-light">Déconnexion</label>
-                    <a href="{{ path('app_logout') }}" class="ml-2 btn btn-outline-light">
+                    <a href="{{ path('app_logout') }}" class="ml-2 btn btn-outline-warning">
                         <i class="text-hover-dark fas fa-sign-out-alt"></i>
                     </a>
                 </form>
@@ -61,14 +61,14 @@
     </main>
     {% block footer %}
     {% if is_granted('IS_AUTHENTICATED_FULLY')%}
-    <div class="row fixed-bottom bg-dark text-light d-flex justify-content-center align-items-center">
-        <section class="col-3 d-flex justify-content-center align-items-center p-2"><a href="{{ path('home') }}"><i class="fas text-light fa-3x fa-home"></i></a></section>
-        <section class="col-3 d-flex justify-content-center align-items-center p-2"><a href="{{ path('profile_show') }}"><i class="fas text-light fa-3x fa-user"></i></a></section>
-        <section class="col-3 d-flex justify-content-center align-items-center p-2"><a href="{{ path('conversation') }}"><i class="fas text-light fa-3x fa-comments"></i></a></section>
-        <section class="col-3 d-flex justify-content-center align-items-center p-2"><a href="{{ path('settings') }}"><i class="fas text-light fa-3x fa-user-cog"></i></a></section>
+    <div class="monFooter border-top border-secondary row fixed-bottom bg-dark d-flex justify-content-center align-items-center">
+        <section class="col-3 d-flex justify-content-center align-items-center p-2"><a href="{{ path('home') }}"><i class="fas mesIconesFooter fa-3x fa-home"></i></a></section>
+        <section class="col-3 d-flex justify-content-center align-items-center p-2"><a href="{{ path('profile_show') }}"><i class="fas mesIconesFooter fa-3x fa-user"></i></a></section>
+        <section class="col-3 d-flex justify-content-center align-items-center p-2"><a href="{{ path('conversation') }}"><i class="fas mesIconesFooter fa-3x fa-comments"></i></a></section>
+        <section class="col-3 d-flex justify-content-center align-items-center p-2"><a href="{{ path('settings') }}"><i class="fas mesIconesFooter fa-3x fa-user-cog"></i></a></section>
     </div>
     {% else %}
-    <div class="row fixed-bottom bg-dark text-light d-flex justify-content-center align-items-center">
+    <div class="monFooter text-light row fixed-bottom bg-dark -flex justify-content-center align-items-center">
         <section class="welcomeMessage text-center d-flex align-items-center">
             <h1>Bienvenue sur #HenriettO</h1>
         </section>
