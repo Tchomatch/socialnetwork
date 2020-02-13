@@ -20,7 +20,7 @@
 			<div class="col-md-4 col-sm-12 mb-2 centrage-profile"> {# Affichage des informations d'inscription #}
 				<p>{{ user.email }}<br>
 			    {{ user.pseudo }}</p>{# Affichage de la possibilite d'une conversation #}
-				<a href="{{ path('chat', {'id': user.id}) }}"><i class="fas fa-comments msgIcon"></i></a>
+				<a href="{{ path('chat', {'id': user.id}) }}"><i class="fas fa-comments msgIcon banner"></i></a>
 			</div>
 
 			<div class="col-md-4 col-sm-12 mb-2 centrage-profile">{# Affichage de la photo #}
@@ -28,13 +28,13 @@
 			</div>
 
 			{% if user.information %}{# Affichage des informations complémentaires #}
-				<div class="col-md-4 col-sm-12">
-					<p>Nom: {{ user.information.nom }}<br>
-						Prénom: {{ user.information.prenom }}<br>
-						Date de naissance: {{ user.information.dateNaissance|date("d-m-Y") }}<br>
-						Adresse: {{ user.information.adresse }}<br>
-						Ville: {{ user.information.ville }}<br>
-						Code Postal: {{ user.information.cp }}<br>
+				<div class="col-md-4 col-sm-12 centrage-profile">
+					<p> <span class="font-weight-bold">Nom :</span>  {{ user.information.nom }}<br>
+						<span class="font-weight-bold">Prénom :</span>  {{ user.information.prenom }}<br>
+						<span class="font-weight-bold">Date de naissance :</span>  {{ user.information.dateNaissance|date("d-m-Y") }}<br>
+						<span class="font-weight-bold">Adresse :</span>  {{ user.information.adresse }}<br>
+						<span class="font-weight-bold">Ville :</span>  {{ user.information.ville }}<br>
+						<span class="font-weight-bold">Code Postal :</span>  {{ user.information.cp }}<br>
 					</p>
 				</div>
 			{% endif %}
@@ -51,7 +51,7 @@
 	{% if userConnect == user %}{# empeche n'importe qui de poster à la place de l'utilisateur #}
 
 		<div class="container">{# Affichage formulaire post #}
-			<button onclick="myDisplay()" class="btn btn-primary mb-2">+</button>
+			<button onclick="myDisplay()" class="btn btn-warning mb-2">+</button>
 			<div id="toggle-post">
 				{{ form_start(addPost) }}
 					{{ form_row(addPost.image) }}

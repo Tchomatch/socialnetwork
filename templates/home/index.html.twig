@@ -8,7 +8,7 @@
 {% if is_granted('IS_AUTHENTICATED_FULLY')%}
 
 		<div class="container">{# Affichage formulaire post #}
-			<button onclick="myDisplay()" class="btn btn-primary mb-2">Nouveau post</button>
+			<button onclick="myDisplay()" class="btn btn-warning mb-2">Nouveau post</button>
 			<div id="toggle-post">
 				{{ form_start(addPost) }}
 					{{ form_row(addPost.image) }}
@@ -31,7 +31,7 @@
     <div class="row d-flex align-items-center">
         <h1 class="text-center pt-md-5 col-12">Bienvenue sur #HenriettO</h1>
         <p class="text-center col-12">Vous n'êtes actuellement pas connecté, pensez à vous authentifier ou à vous inscrire!</p>
-        <a class="btn mr-1 btn-primary col-2 offset-4 text-light" href="{{ path('app_login')}}">Se connecter</a>
+        <a class="btn mr-1 btn-warning col-2 offset-4 text-light" href="{{ path('app_login')}}">Se connecter</a>
         <a class="btn ml-1 btn-secondary col-2 text-light" href="{{ path('app_register')}}">S'inscrire</a>
     </div>
     {% endif %}

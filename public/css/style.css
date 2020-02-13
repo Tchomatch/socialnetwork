@@ -111,9 +111,7 @@
 .colorMsg{
     color: white;
 }
-.colorPseudo{
-    color: #F7971B;
-}
+
 /* ajout de la modale de chargement scrollPost */
 .animLoad {
     display:    none;
@@ -153,7 +151,7 @@ body.loading .animLoad {
     z-index: 30;
 }
 
-.maNavbar a i, .mesIconesFooter {
+.maNavbar a i, .mesIconesFooter, .banner, .colorPseudo {
     color: #f7971b;
     
 }
@@ -194,12 +192,7 @@ body.loading .animLoad {
         height: 8vh;
     }
 
-<<<<<<< HEAD
-@media only screen and (max-width: 576px){
-    
-=======
     .centrage-profile{
         border-right: none;
     }
->>>>>>> c9aae222c83373681ae160b91fe75bf21a3313f9
 }
