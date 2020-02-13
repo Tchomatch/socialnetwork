@@ -7,7 +7,7 @@
         <div class="container chat "> 
             <div class="row headerChat mb-5">
             {# rend le pseudo et l'image cliquable pour renvoyer sur le profil de l'autre utilisateur #}
-            <a class="colorPseudo" href="{{path('profile_show', {'id': userReceiver.id}) }}">
+            <a class="text-warning" href="{{path('profile_show', {'id': userReceiver.id}) }}">
                 {# je récupère les données du user avec qui je chat  #}
                 <img class="imageUserHeader ml-1" src="{{asset('uploads/image/' ~ userReceiver.image)}}" alt="">
                 <h4 class="ml-3">{{userReceiver.pseudo}}</h4>

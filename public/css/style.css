@@ -18,7 +18,7 @@
     justify-content: center;
 }
 
-.centrage-profile {
+.bord-droit {
     border-right: 1px solid #6C757D;
 }
 
@@ -46,7 +46,7 @@
 
 /* style pour barre et résultat de recherche */
 #focus{
-    width: 80%;
+    width: 58%;
     position: fixed;
     z-index: 50;
 }
@@ -109,9 +109,7 @@
    
 }
 
-.colorPseudo{
-    color: #F7971B;
-}
+
 /* ajout de la modale de chargement scrollPost */
 .animLoad {
     display:    none;
@@ -192,7 +190,15 @@ body.loading .animLoad {
         height: 8vh;
     }
 
-    .centrage-profile{
+    .bord-droit {
         border-right: none;
+        border-bottom: 1px solid #6C757D;
+        
+    }
+
+    #focus {
+        left : 30px;
+        right: 30px;
+        width: auto;
     }
 }
