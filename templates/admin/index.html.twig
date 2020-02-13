@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Page d'administration des posts{% endblock %}
+
+{% block body %}
+
+    <div class="example-wrapper">
+            
+        {% if affichagePosts %}{# renvoie de posts #}
+
+            {% for affichagePost in affichagePosts %}{# Affichage de chaque post #}
+
+                <div class="container border">
+
+                    <div class="row p-3">{# affichage pseudo et image #}
+                        <img class="pr-2" style="width:50px;height:50px;" src="{{ asset('uploads/image/' ~ affichagePost.user.image ) }}" alt="Image utilisateur">
+                        <p>{{ affichagePost.user.pseudo }}</p>
+                    </div>
+
+                    {% for image in affichagePost.imagePost %}{# Affichage des images #}
+
+                        <img style="width:100px;height:100px;" src="{{ asset('uploads/image/' ~ image.image ) }}" alt="">
+
+                    {% endfor %}
+
+                    <div class="row">
+
+                        <div class="container col-8">{# Affichage contenue et heure #}
+                            <p>{{ affichagePost.contenu }}</p>
+                            <small>{{ affichagePost.datepost|date("d-m-Y H:i:s") }}</small>
+                        </div>
+
+                        <div class="container col-3 d-flex flex-column justify-content-around">
+                            {% include 'profile/_delete_form.html.twig' %} {# Inclusion de la suppréssion pour les admins #}
+                        </div>
+
+                    </div>
+
+                </div>
+
+            {% endfor %}
+
+        {% endif %}
+
+    </div>
+
+{% endblock %}

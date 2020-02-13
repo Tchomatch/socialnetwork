@@ -84,11 +84,12 @@ class ProfileController extends AbstractController
                $entityManager->flush(); 
             }
 
+            // renvoie vers la page profile
             return $this->redirectToRoute('profile_show');
         }
 
         // Requete SQL
-        $affichagePost = $postRepository->findBy(['user' => $id], ['datepost' => 'DESC'], 1);
+        $affichagePost = $postRepository->findAll();
 
         // recuperation des informations du formulaire information
         $userInformation = $user->getInformation();
@@ -111,10 +112,10 @@ class ProfileController extends AbstractController
         $form = $this->createForm(PostType::class, $post);
         $form->handleRequest($request);
 
+        // si on renvoie le formulaire de changement de post 
+        // alors on le traite et on l'enregistre
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-
-            
 
             return $this->redirectToRoute('profile_show');
         }
@@ -128,31 +129,49 @@ class ProfileController extends AbstractController
     /**
      * @Route("/profile/post-delete/{id}", name="post_delete", methods={"DELETE"})
      */
-    public function delete(Request $request, Post $post): Response
+    public function delete(Request $request, Post $post, UserInterface $userInterface): Response
     {
-        if($this->isCsrfTokenValid('delete'.$post->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
 
-            $listImage = $post->getImagePost();
+        $hasAccess = $this->isGranted('ROLE_ADMIN');
+        $user = $this->getUser();
+        $userConnect = $userInterface;
 
-            foreach($listImage as $image){
-                $post->removeImagePost($image);
+        if ($userConnect == $user || $userConnect == $user["ROLE_ADMIN"]){
+
+            // Si le jeton (token) ets valide, alors on demande la suppréssion du post correspondant
+            if($this->isCsrfTokenValid('delete'.$post->getId(), $request->request->get('_token'))) {
+                $entityManager = $this->getDoctrine()->getManager();
+
+                // on enregistre une liste d'image
+                $listImage = $post->getImagePost();
+
+                // on boucle la suppression d'une collection d'image
+                // Car les clés étrangères doivent être supprimer avant
+                foreach($listImage as $image){
+                    $post->removeImagePost($image);
+                }
+
+                // puis on supprime le post
+                $entityManager->remove($post);
+                $entityManager->flush();
+
+                // message flash de suppression
+                $message = $this->addFlash(
+                    'notice',
+                    'Votre post a été supprimé'
+                );
+
+                if($userConnect == $hasAccess){ // admin renvoyer vers la page admin
+                    return $this->redirectToRoute('admin');
+                } else { // si on est user on renvoie vers profile
+                    return $this->redirectToRoute('profile_show');
+                }
+                
             }
-
-            $entityManager->remove($post);
-            $entityManager->flush();
-
-            $message = $this->addFlash(
-                'notice',
-                'Votre post a été supprimé'
-            );
-
-            return $this->redirectToRoute('profile_show');
         }
-
         return $this->render('profile/index.html.twig', [
             'message' => $message
         ]);
-        
     }
+
 }

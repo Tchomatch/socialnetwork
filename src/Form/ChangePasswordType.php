@@ -18,7 +18,7 @@ class ChangePasswordType extends AbstractType
         ->add('oldPassword', PasswordType::class, array(
             'mapped' => false
         ))
-        ->add('password', RepeatedType::class, array(
+        ->add('newPassword', RepeatedType::class, array(
             'type' => PasswordType::class,
             'invalid_message' => 'Les deux mots de passe doivent être identiques',
             'options' => array(
@@ -27,6 +27,7 @@ class ChangePasswordType extends AbstractType
                 )
             ),
             'required' => true, 
+            'mapped' => false 
         ))
         ->add('submit', SubmitType::class, array(
             'attr' => array(

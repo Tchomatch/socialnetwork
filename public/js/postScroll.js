@@ -16,7 +16,7 @@ var counter = 6;
 //  |-> on ajoute 6 à counter pour que l'offset augmente en conséquence et que la requête suivante en   bdd corresponde aux éléments suivants enregistrés en base.
 //  |-> on ajoute à l'élément #scrollPost les données récupérées.
 
-$(document).scroll(function() {
+$(window).scroll(function() {
     if($(window).scrollTop() == $(document).height() - $(window).height()) {
         
         $.ajax({

@@ -35,15 +35,19 @@ class RegistrationFormType extends AbstractType
 
                 'required' => false,
 
+                // Ajout de contraintes sur l'import du type de fichier pour les images
                 'constraints' => [
                     new File([
+                        // contrainte de taille
                         'maxSize' => '1024k',
+                        // contrainte du type de fichier
                         'mimeTypes' => [
                             'image/gif', 
                             'image/png',
                             'image/jpg', 
                             'image/jpeg',
                         ],
+                        // message d'erreur si le fichier n'est pas conforme
                         'mimeTypesMessage' => 'Veuillez importer un fichier .jpeg, .gif ou .png',
                     ])
                 ],
@@ -55,7 +59,6 @@ class RegistrationFormType extends AbstractType
                 'constraints' => [
                     new IsTrue([
                         'message' => 'Vous devez accepter nos conditions.*',
-                        
                     ]),
                 ],
             ])
