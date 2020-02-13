@@ -120,7 +120,7 @@ class HomeController extends AbstractController
         
         $contentSearch = $request->get('search');
         // sur mon affichage dynamique je lui renseigne une limite pour ne pas m'afficher tous les user lié a la recherche
-        $searchUsers= $userRepo->findUser($contentSearch, 3);
+        $searchUsers= $userRepo->findUser($contentSearch, 5);
         if (empty($contentSearch)){
             $searchUsers = [];
         }

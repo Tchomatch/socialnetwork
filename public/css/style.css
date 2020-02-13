@@ -36,27 +36,29 @@
 .msgIcon{
     font-size: 2em;
 }
-.profileTitle{
-    margin-top: 55px;
-}
+
 .userSearch{
     background-color: black;
     border-bottom: 5px solid grey;
     color: white;
     
 }
-#searchDyn{
-    width: 60%;
+
+/* style pour barre et résultat de recherche */
+#focus{
+    width: 80%;
     position: fixed;
     z-index: 50;
 }
+
+/* style du header dans le chat */
 .headerChat{
     background-color: black;
     color: white;
     
 }
 
-
+/* je redimensionne les images envoyées en message */
 .imageChat{
     height: 200px;
     width: 200px;
@@ -74,37 +76,44 @@
     border-radius: 20px;
 }
 
+/* définition du style des messages envoyés
+ */
 
 .msgSend{
-    background-color: green;
+    background-color: #F7971B;
     color: azure;
-    border: black solid 1px;
     border-radius: 20px;
 }
 
-
+/* définition du style des messages recus */
 .msgRec{
     background-color: black;
     color: azure;
-    border: black solid 1px;
     border-radius: 20px;
 }
+.contenuAntiDebordement{
+    word-wrap: break-word;
+}
 
-
+/* je redimensionne l'image de profil dans le header du chat */
 .imageUserHeader{
     height:50px;
     width: 50px;
     border-radius: 50%;
 }
 
-
+/* style du chat: bordure, marge... */
 .chat{
     border: black solid 1px;
     margin-bottom: 55px;
-    margin-top: 55px;
+   
 }
-
-
+.colorMsg{
+    color: white;
+}
+.colorPseudo{
+    color: #F7971B;
+}
 /* ajout de la modale de chargement scrollPost */
 .animLoad {
     display:    none;

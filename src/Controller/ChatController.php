@@ -23,13 +23,13 @@ class ChatController extends AbstractController
      */
     public function chat($id, Request $request, EntityManagerInterface $entityManager, UserRepository $userRepository, ConversationRepository $conversationRepository, MessageRepository $messageRepository)
     {
-        // $userReceiver est l'utilisateur avec qui je chat, je récupère son id dans l'url (l'autre)
+        // $userReceiver est l'utilisateur avec qui je chat, je récupère son id dans l'url 
         $userReceiver = $userRepository->find($id);
         // $userSender représente l'utilisateur connecté sur son appareil (moi)
         $userSender = $this->getUser();
-        // je récupère l'id de l'utilisateur connecté (mon id) 
+        // je récupère l'id du sender 
         $userSenderId = $userSender->getId();
-        // je récupère la conversation entre l'utilisateur connecté, sur son appareil,  avec un autre  (moi et l'autre)
+        // je récupère la conversation entre 2 utilisateurs   (moi et un autre)
         $conversation = $conversationRepository->findConv($id, $userSenderId);
 
         $message = new Message();
@@ -39,40 +39,49 @@ class ChatController extends AbstractController
 
         // je recupere les données du formulaire message
         $form->handleRequest($request);
-        // je vérifie si une conversation entre les deux utilisateur existe si non (null) j'en crée une nouvelle
+        // je vérifie si une conversation entre les deux utilisateur existe sinon  j'en crée une nouvelle
         if  ($conversation === null) {
         
             $conversation = new Conversation();
 
-            // je set l'utilisateur avec qui je suis dans la coonversation
+            // je set l'utilisateur qui recois le premier message
             $conversation->setUserReceiver($userReceiver);
-            // je set l'utilisateur connectésur son appareil (moi)
+            // je set l'utilisateur envoie le premier message
             $conversation->setUserSender($userSender);
 
-            // j'enregistre ma conversation dans ma BDD
+            // j'enregistre ma conversation 
             $entityManager->persist($conversation);
             
         }
+        // Je suis dans le cas où j'envoie les message donc je suis tjrs le sender et lui le receiver 
         // si les données sont valides
         if ($form->isSubmitted() && $form->isValid()) {
             
+            // je récupère la conversation
             $message->setConversation($conversation);
+            // je set la date et l'heure quand le message est envoyé
             $message->setDateEnvoi(new \DateTime());
+            // je set le userSender (moi)
             $message->setUserSender($userSender);
+            // je set le userReceiver (l'autre user)
             $message->setUserReceiver($userReceiver);
 
             // je procede a l'enregistrement de mes données messages
             $entityManager->persist($message);
         
+            // je crée la variable $files qui est mes données entrer dans l'upload de fichier
             $files = $form->get('image')->getData();
            
+            // si un ou des fichiers sont uploads alors je rentre dans la condition
             if ($files) {
                 
-                // Move the file to the directory where brochures are stored
+                // je crée une boucle car mon ou mes images sont une collection
                 foreach ($files as $file){
+                    // je donne un nvx nom a mon fichier
                     $newFilename ='img_' . uniqid().'.'.$file->guessExtension();
                    
                     try {
+                        // je déplace mon fichier ou je le souhaite
                         $file->move(
                             $this->getParameter('images_directory'),
                             $newFilename
@@ -80,21 +89,24 @@ class ChatController extends AbstractController
                         
                     } catch (FileException $e) {
                        
-                        // ... handle exception if something happens during file upload
+                        // si erreur lors de l'envoie d'un fichier
                     }
                 
-                    // updates the 'brochureFilename' property to store the jpg file name
-                    // instead of its contents
+                    // j'instancie une nouvelle image
                     $imageChat = new ImageChat();
+                    // je set mon message lié a mon image
                     $imageChat->setMessage($message);
+                    // je set le nouveau nom de mon fichier 
                     $imageChat->setImage($newFilename);
+                    // jenregistre mon image 
                     $entityManager->persist($imageChat);
+                    // je lie mon image a mon message
                     $message->addImageChat($imageChat);
                 } 
                
             }
             
-            // j'enregistre les données en BDD
+            // j'enregistre les données en BDD que si un fichier est upload ou le contenu est rempli  ou les deux
             if( $message->getContenu()!== null || !empty($file) ){
                 
                 $entityManager->flush();
@@ -102,7 +114,8 @@ class ChatController extends AbstractController
             
             return $this->redirectToRoute('chat', ['id' => $userReceiver->getId()]);
         } 
-       
+        
+        // je récupère tous les messages lié a ma conversation récupérée au dessus grace au findConv() 
         $msg = $conversation->getMessages();
        
         
@@ -119,12 +132,13 @@ class ChatController extends AbstractController
      */
     public function messages($id, UserRepository $userRepository, ConversationRepository $conversationRepository)
     {
+        // nouvelle fonction qui renvoie à une autre vue pour pouvoir rendre mon chat dynamique avec du ajax
         $userReceiver = $userRepository->find($id);
         $userSender =   $this->getUser();
         $userSenderId = $userSender->getId();
         $conversation = $conversationRepository->findConv($id, $userSenderId);
 
-        // je récupère tous les messages lié a la conversation des 2 user
+        // je récupère tous les messages lié a ma conversation 
         $msg = $conversation->getMessages();
         
 
