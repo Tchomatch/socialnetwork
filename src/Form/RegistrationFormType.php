@@ -37,7 +37,7 @@ class RegistrationFormType extends AbstractType
 
                 'constraints' => [
                     new File([
-                        'maxSize' => '1024k',
+                        'maxSize' => '10024k',
                         'mimeTypes' => [
                             'image/gif', 
                             'image/png',

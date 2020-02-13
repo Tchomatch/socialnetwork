@@ -4,9 +4,17 @@
 {# initialisation d'une condition de vérification  d'authentification et affichage différé si l'utilisateur n'est pas connecté #}
 <div class="my-5">
 {% if is_granted('IS_AUTHENTICATED_FULLY')%}
-    
 
-    
+		<div class="container">{# Affichage formulaire post #}
+			<button onclick="myDisplay()" class="btn btn-primary mb-2">Nouveau post</button>
+			<div id="toggle-post">
+				{{ form_start(addPost) }}
+					{{ form_row(addPost.image) }}
+					{{ form_row(addPost.contenu) }}
+				{{ form_end(addPost) }}
+			</div>
+		</div>
+
     {% for post in allPost  %}
     {# chargement des 6 premiers post #}
     {% include 'home/_post.html.twig' %}
@@ -30,6 +38,5 @@
 
 {% endblock %}
 {% block additionnalJS %}
-    <script src="{{ asset('js/postScroll.js') }}"></script>
-
+    <script src="{{ asset('js/post.js') }}"></script>
 {% endblock %}

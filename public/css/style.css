@@ -3,25 +3,25 @@
     - settings
  */
 .custom-file-label::after {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 3;
-    display: block;
-    height: calc(1.5em + .75rem);
-    padding: .375rem .75rem;
-    line-height: 1.5;
-    color: #495057;
     content: "Parcourir";
-    background-color: #e9ecef;
-    border-left: inherit;
-        border-left-color: inherit;
-    border-radius: 0 .25rem .25rem 0;
 }
 
+.centrage-profile{ /* centrer et aligner correctement la présentation du profile */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
 
-#george{
+.contenuAntiDebordement{
+    word-wrap: break-word;
+}
+
+.afficher-post-entier{ /* Afficher le post entier pour le faire sortir de sous le footer */
+    margin-bottom: 70px;
+}
+
+#toggle-post{ /* Toggle pour les posts de profile */
     display: none;
 }
 .msgIcon{
@@ -159,4 +159,8 @@ body.loading .modal {
         
         height: 8vh;
     }
+}
+
+@media only screen and (max-width: 576){
+    
 }

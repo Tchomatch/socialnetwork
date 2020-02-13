@@ -42,3 +42,15 @@ $(document).on({
     ajaxStart: function() { $body.addClass("loading");    },
     ajaxStop: function() { $body.removeClass("loading"); }    
 }); 
+
+function myDisplay(){
+    // Je séléctionne la classe toggle-post 
+    $("#toggle-post").toggle(
+        function(){
+            $(this).addClass("toggle-post"); // ajout display none
+        }, function(){
+            $(this).removeClass("toggle-post"); // remove display none
+        }
+    );
+
+}

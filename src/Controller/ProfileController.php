@@ -26,7 +26,7 @@ class ProfileController extends AbstractController
         
         // création d'un utilisateur connecté pour différencier chaque post de chaque user
         $userConnect = $userInterface;
-    
+
         if($id === false){
             $user = $this->getUser();
             $id = $user->getId();
@@ -36,7 +36,7 @@ class ProfileController extends AbstractController
 
         // Instanciation d'un nouveau post
         $post = new Post();
-        $form = $this->createForm(PostType::class, $post);
+        $form = $this->createForm(PostType::class, $post); // Création du formulaire
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
@@ -80,11 +80,12 @@ class ProfileController extends AbstractController
             
             $entityManager->persist($post);
 
+            // Ne peut pas rien envoyer soit une photo soit un contenu
             if(null != $post->getContenu() || !empty($file)){
                $entityManager->flush(); 
             }
 
-            // renvoie vers la page profile
+            // renvoie vers la page profile pour raffraichir la page
             return $this->redirectToRoute('profile_show');
         }
 
@@ -132,7 +133,9 @@ class ProfileController extends AbstractController
     public function delete(Request $request, Post $post, UserInterface $userInterface): Response
     {
 
+        // création d'une variable admin
         $hasAccess = $this->isGranted('ROLE_ADMIN');
+        
         $user = $this->getUser();
         $userConnect = $userInterface;
 
