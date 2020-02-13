@@ -6,6 +6,20 @@
 
 {% block body %}
     {# J'affiche le formulaire d'inscription #}
+<<<<<<< HEAD
+    <div class="row d-flex justify-content-center">
+        <div class="col-6 d-flex flex-column align-items-center">
+        <h1>Inscription</h1>
+        {{ form_start(registrationForm) }}
+            {{ form_row(registrationForm.pseudo) }}
+            {{ form_row(registrationForm.email) }}
+            {{ form_row(registrationForm.plainPassword) }}
+            {{ form_row(registrationForm.image) }}
+            {{ form_row(registrationForm.agreeTerms) }}
+            <small><p>*Ces champs sont obligatoires</p></small>
+            <button class="btn btn-secondary">Inscription</button>
+        {{ form_end(registrationForm) }}
+=======
     <div class="container">
         <div class="signForm row d-flex justify-content-center align-items-center">
             <div class="col-6 d-flex flex-column align-items-center">
@@ -21,6 +35,7 @@
                 <button class="btn btn-primary">Inscription</button>
             {{ form_end(registrationForm) }}
             </div>
+>>>>>>> df122885934196c809162fcd32c398d1810c75cd
         </div>
     </div>
 {% endblock %}
