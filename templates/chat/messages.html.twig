@@ -21,12 +21,12 @@
                 <h6 class="ml-1">{{message.userSender.pseudo}}</h6>
             </div>
             {# j'affiche le contenu du message #}
-            <h4>{{message.contenu}}</h4>
+            <h4 class="contenuAntiDebordement">{{message.contenu}}</h4>
             
             {# j'affiche le ou les images lié au message  #}
             {% for image in message.imageChats %}
             
-            {# je crée un lien vers mon image en taille réelle sur mon iage réduite dans mon message #}
+            
            
                 <img class="imageChat" src="{{asset('uploads/image/' ~ image.image)}}" alt="">
             

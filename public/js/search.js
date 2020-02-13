@@ -18,7 +18,11 @@ function searchDyn(){
   
     // a chaque fois que je clique en dehors de l'input mes resultat de recherche ne s'affiche plus
     $( "#search" ).focusout(function() {
-        $("#focus").css("display", "none") 
+        // je donne un temps de 100ms avant que la div passe en display none poue laisser le temps au clic d'etre détécter
+        setTimeout(function() {
+            $("#focus").css("display", "none") 
+        }, 100)
+        
     });
 
 
