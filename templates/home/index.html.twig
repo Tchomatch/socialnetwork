@@ -19,14 +19,14 @@
     {% else %}
     {# message d'accueil, bouton de redirection inscription/connection si l'utilisateur n'est pas connecté #}
     <div class="row d-flex align-items-center">
-        <h1 class="text-center pt-md-5 col-12">Bienvenue sur #HentiettO</h1>
-        <p class="text-center text-warning col-12">Vous n'êtes actuellement pas connecté, pensez à vous authentifier ou à vous enregistrer!</p>
+        <h1 class="text-center pt-md-5 col-12">Bienvenue sur #HenriettO</h1>
+        <p class="text-center col-12">Vous n'êtes actuellement pas connecté, pensez à vous authentifier ou à vous inscrire!</p>
         <a class="btn mr-1 btn-primary col-2 offset-4 text-light" href="{{ path('app_login')}}">Se connecter</a>
         <a class="btn ml-1 btn-secondary col-2 text-light" href="{{ path('app_register')}}">S'inscrire</a>
     </div>
     {% endif %}
 </div>
-<div class="modal"></div>
+<div class="animLoad"></div>
 
 {% endblock %}
 {% block additionnalJS %}
