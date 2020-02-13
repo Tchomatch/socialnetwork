@@ -3,7 +3,7 @@
 
         <a class="userSearch  row" href="{{ path('profile_show', {'id': userRechercher.id}) }}">
             <img class="imageUserHeader ml-1" src="{{asset('uploads/image/' ~ userRechercher.image)}}" alt="">
-            <h4 class="ml-3">{{userRechercher.pseudo}}</h4>
+            <h4 class="ml-3 colorPseudo">{{userRechercher.pseudo}}</h4>
         </a>
 
     {% else  %}    

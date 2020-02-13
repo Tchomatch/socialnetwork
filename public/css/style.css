@@ -108,10 +108,10 @@
     margin-bottom: 55px;
    
 }
-.colorMsg{
-    color: white;
-}
 
+.colorPseudo{
+    color: #F7971B;
+}
 /* ajout de la modale de chargement scrollPost */
 .animLoad {
     display:    none;
