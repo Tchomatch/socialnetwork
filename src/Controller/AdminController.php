@@ -13,12 +13,13 @@ class AdminController extends AbstractController
      */
     public function index(PostRepository $postRepository)
     {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN');
         // mettre un utilisateur admin
-
-        $affichagePost = $postRepository->findAll();
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+        
         // J'affiche tout les posts 
-
+        $affichagePost = $postRepository->findAll();
+        
+        // affichage des variables de la vue
         return $this->render('admin/index.html.twig', [
             'affichagePosts' => $affichagePost,
         ]);
