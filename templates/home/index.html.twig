@@ -5,7 +5,7 @@
 {% block body %}
 {# initialisation d'une condition de vérification  d'authentification et affichage différé si l'utilisateur n'est pas connecté #}
 <div class="my-5">
-{% if is_granted('IS_AUTHENTICATED_FULLY')%}
+    {% if is_granted('IS_AUTHENTICATED_FULLY')%}
 
 		<div class="container">{# Affichage formulaire post #}
 			<button onclick="myDisplay()" class="btn btn-warning mb-2">Nouveau post</button>
