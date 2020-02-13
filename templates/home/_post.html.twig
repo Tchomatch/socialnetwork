@@ -5,7 +5,7 @@
                 {# rend le pseudo et l'image cliquable pour renvoyer sur le profil de l'auteur du post #}
                 <a class="text-light d-flex align-items-center" href="{{path('profile_show', {'id': post.user.id}) }}">
                     <img class="pr-2" style="width:50px;height:50px;" src="{{ asset('uploads/image/' ~ post.user.image ) }}" alt="Image user's">
-                    <p class="">{{ post.user.pseudo }}</p> 
+                    <p class="colorPseudo">{{ post.user.pseudo }}</p> 
                 </a>
             </div>
         

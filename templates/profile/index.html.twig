@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Profile{% endblock %}
+{% block title %}Profil{% endblock %}
 
 {% block body %}
 
@@ -69,11 +69,11 @@
 
 				{% if affichagePost.user == user %}{# afficher les postes de l'utilisateur #}
 
-					<div class="container border mb-2">
+					<div class="container rounded border bg-dark text-light mb-3">
 
 						<div class="row p-3">
 							<img class="pr-2" style="width:50px;height:50px;" src="{{ asset('uploads/image/' ~ user.image ) }}" alt="Image utilisateur">
-							<p>{{ user.pseudo }}</p>
+							<p class="colorPseudo">{{ user.pseudo }}</p>
 						</div>
 
 						{% for image in affichagePost.imagePost %} {# Affichage des images #}
