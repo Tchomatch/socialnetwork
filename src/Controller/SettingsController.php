@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
@@ -43,6 +44,25 @@ class SettingsController extends AbstractController
         // si les données sont valides
         if ($form->isSubmitted() && $form->isValid()) {
             
+            $file = $form->get('image')->getData();
+
+
+            if ($file) {
+                
+                // Déplacez le fichier dans le répertoire où les brochures sont stockées
+            
+                $newFilename ='img_' . uniqid().'.'.$file->guessExtension();
+                try {
+                    $file->move(
+                        $this->getParameter('images_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    // ... gérer l'exception si quelque chose se produit pendant le téléchargement du fichier
+                } 
+                
+                $user->setImage($newFilename);
+            }
             // je procede a l'enregistrement de mes données
             $entityManager->persist($user);
             
