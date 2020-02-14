@@ -18,15 +18,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 
 class SettingsController extends AbstractController
-{
-    private $encoder;
-    
-    public function __construct(UserPasswordEncoderInterface $encoder)
-    {
-        $this->encoder = $encoder;
-    }
-    
-    
+{   
     
     /**
     * @Route("/settings", name="settings")
