@@ -26,8 +26,6 @@ $(window).scroll(function() {
             success: function(data){
                 counter += 6;
                 $("#scrollPost").append(data);
-                console.log(counter);
-                console.log(data);
             }            
         })        
     }
