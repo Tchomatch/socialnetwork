@@ -14,15 +14,17 @@ class LoginController extends AbstractController
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        // if ($this->getUser()) {
-        //     return $this->redirectToRoute('target_path');
-        // }
+        // Si l'utilisateur est connecté il est renvoyé vers la home
+        if ($this->getUser()) {
+            return $this->redirectToRoute('home');
+        }
 
-        // get the login error if there is one
+        // pour obtenir l'erreur de connexion s'il y en a une
         $error = $authenticationUtils->getLastAuthenticationError();
-        // last username entered by the user
+        // pour récupérer le dernier identifiant entré par l'utilisateur
         $lastUsername = $authenticationUtils->getLastUsername();
 
+        // On retourne nos variables à notre vue
         return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
     }
 
@@ -31,6 +33,6 @@ class LoginController extends AbstractController
      */
     public function logout()
     {
-        throw new \Exception('This method can be blank - it will be intercepted by the logout key on your firewall');
+        //la fonction logout peut rester vide pour fonctionner et elle nous redirige vers la page renseigné dans le security.yaml avec le target
     }
 }

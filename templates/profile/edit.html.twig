@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edition du Post
+{% endblock %}
+
+{% block body %}{# Edition du post #}
+	<h1>Edit Post</h1>
+	{{ form_start(form) }}
+	{{ form_widget(form) }}
+	{{ form_end(form) }}
+{% endblock %}

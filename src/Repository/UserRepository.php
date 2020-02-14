@@ -23,7 +23,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     }
 
     /**
-     * Used to upgrade (rehash) the user's password automatically over time.
+     * Hashage automatique des mot de passe
      */
     public function upgradePassword(UserInterface $user, string $newEncodedPassword): void
     {
@@ -39,29 +39,18 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     // /**
     //  * @return User[] Returns an array of User objects
     //  */
-    /*
-    public function findByExampleField($value)
+    
+    // fonction qui me sert a trouver tous les user ayant les lettres en communs avec celle qui on été entrer dans l'input  
+    public function findUser($search, $limit = null)
     {
-        return $this->createQueryBuilder('u')
-            ->andWhere('u.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('u.id', 'ASC')
-            ->setMaxResults(10)
+        return $this->createQueryBuilder('s')
+            ->andWhere('s.pseudo LIKE :pseudo')
+            ->setParameter('pseudo', '%'.$search.'%')
+            ->orderBy('s.pseudo') 
+            ->setMaxResults($limit)
             ->getQuery()
             ->getResult()
         ;
     }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?User
-    {
-        return $this->createQueryBuilder('u')
-            ->andWhere('u.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
+    
 }

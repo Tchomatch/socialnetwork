@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Acceuil{% endblock %}
+
+{% block body %}
+{# initialisation d'une condition de vérification  d'authentification et affichage différé si l'utilisateur n'est pas connecté #}
+<div class="my-5">
+    {% if is_granted('IS_AUTHENTICATED_FULLY')%}
+
+		<div class="container">{# Affichage formulaire post #}
+			<button onclick="myDisplay()" class="btn btn-warning mb-2">Nouveau post</button>
+			<div id="toggle-post">
+				{{ form_start(addPost) }}
+					{{ form_row(addPost.image) }}
+					{{ form_row(addPost.contenu) }}
+				{{ form_end(addPost) }}
+			</div>
+		</div>
+
+    {% for post in allPost  %}
+    {# chargement des 6 premiers post #}
+    {% include 'home/_post.html.twig' %}
+    
+    {% endfor %}
+    {# cette modal est chargée chaque fois qu'une requête ajax sera lancée sur cette page #}
+    {# Les contenus chargés en base par requête ajax seront chargés dans cette balise d'id scrollPost #}
+    <div id="scrollPost"></div>
+    
+    {% else %}
+    {# message d'accueil, bouton de redirection inscription/connection si l'utilisateur n'est pas connecté #}
+    <div class="row d-flex align-items-center">
+        <h1 class="text-center pt-md-5 col-12">Bienvenue sur #HenriettO</h1>
+        <p class="text-center col-12">Vous n'êtes actuellement pas connecté, pensez à vous authentifier ou à vous inscrire!</p>
+        <a class="btn mr-1 btn-warning col-2 offset-4 text-light" href="{{ path('app_login')}}">Se connecter</a>
+        <a class="btn ml-1 btn-secondary col-2 text-light" href="{{ path('app_register')}}">S'inscrire</a>
+    </div>
+    {% endif %}
+</div>
+<div class="animLoad"></div>
+
+{% endblock %}
+{% block additionnalJS %}
+    <script src="{{ asset('js/post.js') }}"></script>
+{% endblock %}

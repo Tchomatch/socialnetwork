@@ -11,6 +11,7 @@ use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
@@ -19,23 +20,32 @@ class RegistrationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('pseudo')
-            ->add('email')
+            ->add('pseudo', TextType::class, [
+                'label' => 'Pseudo*',
+            ])
+            ->add('email', TextType::class, [
+                'label' => 'Email*',
+            ])
+            
             ->add('image', FileType::class, [
                 
-                'label' => 'Image (fichier)',                // non mappé signifie que ce champ n'est associé à aucune propriété d'entité
-                'mapped' => false,                // rendez-le facultatif pour ne pas avoir à télécharger à nouveau le fichier PDF
-                // chaque fois que vous modifiez les détails du produit
-                'required' => false,                // les champs non mappés ne peuvent pas définir leur validation à l'aide d'annotations
-                // dans l'entité associée, vous pouvez donc utiliser les classes de contraintes PHP
+                'label' => 'Image (facultatif)',
+
+                'mapped' => false,
+
+                'required' => false,
+
+                // Ajout de contraintes sur l'import du type de fichier pour les images
                 'constraints' => [
                     new File([
-                        'maxSize' => '1024k',
+                        'maxSize' => '10024k',
                         'mimeTypes' => [
                             'image/gif', 
-                            'image/png', 
+                            'image/png',
+                            'image/jpg', 
                             'image/jpeg',
                         ],
+                        // message d'erreur si le fichier n'est pas conforme
                         'mimeTypesMessage' => 'Veuillez importer un fichier .jpeg, .gif ou .png',
                     ])
                 ],
@@ -43,23 +53,25 @@ class RegistrationFormType extends AbstractType
             ])
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
+                'label' => 'Accepter les conditions*',
                 'constraints' => [
                     new IsTrue([
-                        'message' => 'You should agree to our terms.',
+                        'message' => 'Vous devez accepter nos conditions.*',
                     ]),
                 ],
             ])
             ->add('plainPassword', PasswordType::class, [
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
+                'label' => 'Mot de passe*',
                 'mapped' => false,
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Please enter a password',
+                        'message' => 'Veuillez entrer un mot de passe.',
                     ]),
                     new Length([
                         'min' => 6,
-                        'minMessage' => 'Your password should be at least {{ limit }} characters',
+                        'minMessage' => 'Votre mot de passe doit contenir au moins {{ limit }} caractères.',
                         // max length allowed by Symfony for security reasons
                         'max' => 4096,
                     ]),
