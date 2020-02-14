@@ -103,24 +103,23 @@ class SettingsController extends AbstractController
             $user = $this->getUser();
             $form = $this->createForm(ChangePasswordType::class, $user);
             $form->handleRequest($request); 
-            // $plainPassword = $user->getPassword();
-            
-            // dump($user->getPassword());
+        
             // si les données transmise dans le formulaire sont valides
             if ($form->isSubmitted() && $form->isValid()) {
                 // on définit une variable $oldPassword qui récupère dans les données transmise par l'utilisateur au champ oldPassword formulaire le password 
                 $oldPassword = $request->request->get('change_password')['oldPassword'];
-                // dd($request->request);
                 // Si l'ancien mot de passe est bon
                 if ($passwordEncoder->isPasswordValid($user, $oldPassword)) {
-                    
+                    // ici on récupère le nouveau mot de passe envoyé dans le formulaire par l'utilisateur
                     $newPassword = $form->get('newPassword')->getData();
+                    // On procède à l'encryptage du mot de passe avant de l'enregistrer en base de données.
                     $newEncodedPassword = $passwordEncoder->encodePassword($user, $newPassword);
                     $user->setPassword($newEncodedPassword);
                     
+
                     $entityManager->persist($user);
                     $entityManager->flush();
-                    // j'ajoute un message flash pour alerter le user
+                    // j'ajoute un message flash pour alerter l'utilisateur que son mot de passe a bien été changé.
                     $this->addFlash(
                         'modif', 'Votre Mot de passe a bien été modifié !'
                     );
