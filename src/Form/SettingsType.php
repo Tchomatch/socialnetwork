@@ -38,7 +38,7 @@ class SettingsType extends AbstractType
             // J'ajoute un bouton pour valider le formulaire
             ->add('modifier', SubmitType::class, [
                 // je modifie sa couleur de base
-                'attr' => ['class' => 'secondary'],
+                'attr' => ['class' => 'btn-warning'],
             ]);
         ;
     }

@@ -2,5 +2,5 @@
 {# Modale de suppression #}
     <input type="hidden" name="_method" value="DELETE">
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ affichagePost.id) }}">
-    <button class="btn btn-danger mb-2">Supprimer</button>{# affichage du bouton sur la vu #}
+    <button class="btn btn-danger btn-block mb-2">Supprimer</button>{# affichage du bouton sur la vu #}
 </form>

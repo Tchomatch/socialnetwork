@@ -30,7 +30,7 @@ class InformationType extends AbstractType
             //J'ajoute un bouton pour valider mon f
             ->add('modifier', SubmitType::class, [
                 // je modifie sa couleur de base
-                'attr' => ['class' => 'secondary'],
+                'attr' => ['class' => 'btn-warning'],
             ]);
         ;
     }

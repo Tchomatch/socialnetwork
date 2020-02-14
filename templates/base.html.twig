@@ -1,115 +1,112 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
-    <title>{% block title %}#HenriettO{% endblock %}</title>
-    {% block stylesheets %}
-    
-    <link rel="stylesheet" href="/css/bootstrap/bootstrap.css">
-    <link rel="stylesheet" href="/css/fontawesome/all.min.css">
-    <link rel="stylesheet" href="/css/style.css">
-    
-    {% endblock %}
-</head>
-<<<<<<< HEAD
-<body>
-    <nav class="maNavbar navbar navbar-expand-md navbar-dark bg-dark">
-        
-        {% block header %}
-        <a class="navbar-brand" href="{{ path('home') }}">#HenriettO</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-=======
-<body id="main">
-    
-    {% block header %}
-    <nav class="maNavbar navbar-dark navbar navbar-expand-md bg-dark">
-    <a class="navbar-brand" href="{{ path('home') }}">#HenriettO</a>
-        <button class="custom-toggler navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
->>>>>>> df122885934196c809162fcd32c398d1810c75cd
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav ml-auto">
-                {% if is_granted('IS_AUTHENTICATED_FULLY')%}
-                <form class="form-inline my-2 my-lg-0" action="{{ path('search')}}" method="post">
-                    {% if is_granted('ROLE_ADMIN') %}
-                        <a class="mr-4 text-light" href="{{ path('admin') }}">Admin</a>
-                    {% endif %}
-                    <input class="form-control mr-sm-2" type="search" placeholder="rechercher" aria-label="Search" name="search" id="search">
-<<<<<<< HEAD
-                    <div class="text-center">
-                        <a href="{{ path('app_logout') }}" class="ml-2 btn btn-outline-light">
-                            <i class="text-hover-dark fas fa-sign-out-alt"></i>
-                            <small><label for="" class="text-light">Déconnexion</label></small>
-                        </a>
-                    </div>
-                    <button class="btn btn-outline-light my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
-                    
-                    
-=======
-                    <button class="btn btn-outline-warning my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
-                    <label for="" class="ml-4 text-light">Déconnexion</label>
-                    <a href="{{ path('app_logout') }}" class="ml-2 btn btn-outline-warning">
-                        <i class="text-hover-dark fas fa-sign-out-alt"></i>
-                    </a>
->>>>>>> df122885934196c809162fcd32c398d1810c75cd
-                </form>
-                {% else %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ path('app_register')}}">Inscription</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ path('app_login')}}">Connexion</a>
-                </li>
-                {% endif %}
-            </ul>
-        </div>
-    </nav>
-   
-    {% endblock %}
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			{% block title %}#HenriettO{% endblock %}
+		</title>
+		{% block stylesheets %}
 
-    <div class="container">
-    
-        <div id="searchDyn" >
+			<link rel="stylesheet" href="/css/bootstrap/bootstrap.css">
+			<link rel="stylesheet" href="/css/fontawesome/all.min.css">
+			<link rel="stylesheet" href="/css/style.css">
 
-        </div>
-    
-    </div>
-    
+		{% endblock %}
+	</head>
+	<body id="main">
 
-    <main class="container-fluid">
-    
-    {% block body %}{% endblock %}
-    </main>
-    {% block footer %}
-    {% if is_granted('IS_AUTHENTICATED_FULLY')%}
-    <div class="monFooter border-top border-secondary row fixed-bottom bg-dark d-flex justify-content-center align-items-center">
-        <section class="col-3 d-flex justify-content-center align-items-center p-2"><a href="{{ path('home') }}"><i class="fas mesIconesFooter fa-3x fa-home"></i></a></section>
-        <section class="col-3 d-flex justify-content-center align-items-center p-2"><a href="{{ path('profile_show') }}"><i class="fas mesIconesFooter fa-3x fa-user"></i></a></section>
-        <section class="col-3 d-flex justify-content-center align-items-center p-2"><a href="{{ path('conversation') }}"><i class="fas mesIconesFooter fa-3x fa-comments"></i></a></section>
-        <section class="col-3 d-flex justify-content-center align-items-center p-2"><a href="{{ path('settings') }}"><i class="fas mesIconesFooter fa-3x fa-user-cog"></i></a></section>
-    </div>
-    {% else %}
-    <div class="monFooter text-light row fixed-bottom bg-dark -flex justify-content-center align-items-center">
-        <section class="welcomeMessage text-center d-flex align-items-center">
-            <h1>Bienvenue sur #HenriettO</h1>
-        </section>
-    </div>
-    {% endif %}
-    {% endblock %}
-    {% block javascripts %}
-    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="/js/fontawesome/all.min.js"></script>
-    <script type="text/javascript" src="/js/bootstrap/bootstrap.min.js"></script>
-    <script type="text/javascript" src="/js/main.js"></script> 
-    <script src="/js/search.js"></script>
-    {% endblock %}
-    {% block additionnalJS %}{% endblock %}
-    {% block searchBarJS %} 
-        <script> 
-            searchDyn();
-        </script> 
-    {% endblock %}
-</body>
-</html>
+		{% block header %}
+			<nav class="maNavbar navbar-dark navbar navbar-expand-md bg-dark">
+				<a class="navbar-brand" href="{{ path('home') }}">#Henriett<span class="banner">O</span></a>
+				<button class="custom-toggler navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarCollapse">
+					<ul class="navbar-nav ml-auto">
+						{% if is_granted('IS_AUTHENTICATED_FULLY')%}
+							<form class="form-inline my-2 my-lg-0" action="{{ path('search')}}" method="post">
+								{% if is_granted('ROLE_ADMIN') %}
+                                <a class="mr-4 text-light" href="{{ path('admin') }}">Admin</a>
+                                {% endif %}
+                                <input class="form-control mr-sm-2" type="search" placeholder="rechercher" aria-label="Search" name="search" id="search">
+								<button class="btn btn-outline-warning my-2 my-sm-0" type="submit">
+									<i class="fas fa-search"></i>
+								</button>
+
+								<label for="" class="ml-4 text-light">Déconnexion</label>
+
+								<a href="{{ path('app_logout') }}" class="ml-2 btn btn-outline-warning">
+									<i class="text-hover-dark fas fa-sign-out-alt"></i>
+								</a>
+							</form>
+						{% else %}
+							<li class="nav-item">
+								<a class="nav-link" href="{{ path('app_register')}}">Inscription</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="{{ path('app_login')}}">Connexion</a>
+							</li>
+						{% endif %}
+					</ul>
+				</div>
+			</nav>
+
+		{% endblock %}
+
+		<div class="container">
+
+			<div id="searchDyn"></div>
+
+		</div>
+
+
+		<main class="container-fluid"> {% block body %}{% endblock %}
+			</main>
+			{% block footer %}
+				{% if is_granted('IS_AUTHENTICATED_FULLY')%}
+					<div class="monFooter border-top border-secondary row fixed-bottom bg-dark d-flex justify-content-center align-items-center">
+						<section class="col-3 d-flex justify-content-center align-items-center p-2">
+							<a href="{{ path('home') }}">
+								<i class="fas mesIconesFooter fa-3x fa-home"></i>
+							</a>
+						</section>
+						<section class="col-3 d-flex justify-content-center align-items-center p-2">
+							<a href="{{ path('profile_show') }}">
+								<i class="fas mesIconesFooter fa-3x fa-user"></i>
+							</a>
+						</section>
+						<section class="col-3 d-flex justify-content-center align-items-center p-2">
+							<a href="{{ path('conversation') }}">
+								<i class="fas mesIconesFooter fa-3x fa-comments"></i>
+							</a>
+						</section>
+						<section class="col-3 d-flex justify-content-center align-items-center p-2">
+							<a href="{{ path('settings') }}">
+								<i class="fas mesIconesFooter fa-3x fa-user-cog"></i>
+							</a>
+						</section>
+					</div>
+				{% else %}
+					<div class="monFooter text-light row fixed-bottom bg-dark -flex justify-content-center align-items-center">
+						<section class="welcomeMessage text-center d-flex align-items-center">
+							<h1>Bienvenue sur <span class="banner">#HenriettO</span></h1>
+						</section>
+					</div>
+				{% endif %}
+			{% endblock %}
+			{% block javascripts %}
+				<script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+				<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+				<script type="text/javascript" src="/js/fontawesome/all.min.js"></script>
+				<script type="text/javascript" src="/js/bootstrap/bootstrap.min.js"></script>
+				<script type="text/javascript" src="/js/main.js"></script>
+				<script src="/js/search.js"></script>
+			{% endblock %}
+			{% block additionnalJS %}{% endblock %}
+			{% block searchBarJS %}
+				<script>
+					searchDyn();
+				</script>
+			{% endblock %}
+		</body>
+	</html>
