@@ -24,7 +24,9 @@ class MessageType extends AbstractType
                 'required' => false,
             
             ])
-            ->add ('Envoyer', SubmitType::class);
+            ->add ('Envoyer', SubmitType::class, [
+                'attr' => ['class' => 'btn-warning']
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

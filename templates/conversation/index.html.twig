@@ -3,14 +3,14 @@
 
 {% block body %}
     
-    {# On récupère toutes les conversations dans lesquelles est impliqué notre utilisateur #}
+    {# Je récupère toutes les conversations dans lesquelles est impliqué notre utilisateur #}
     {% for conversation in conversations  %}
         <div class="container border my-3 bg-dark text-white">
-        {# On affiche toutes les conversation ou l'id de l'utilisateur connecté correspond à l'id du userReceiver #}
+        {# J'affiche toutes les conversation ou l'id de l'utilisateur connecté qui correspond à l'id du userReceiver #}
         {% if app.user == conversation.userReceiver %}
         
             {# Avec la photo de profil de son correspondant #}
-            <img class="imageUserChat" {# ajout d'une classe qui définit la taille des images #} src="/uploads/image/{{ conversation.userSender.image }}">
+            <img class="imageUserChat" {# j'ajoute une classe qui définit la taille des images #} src="/uploads/image/{{ conversation.userSender.image }}">
             {# le pseudo de son correspondant #}
             <a class="text-warning" href="{{ path('chat', {'id' : conversation.userSender.id })}}"><h4>{{ conversation.userSender.pseudo  }}</h4></a>
             {# et le dernier message de leur conversation #}
