@@ -49,7 +49,7 @@ class SettingsController extends AbstractController
             // j'enregistre les données en BDD
             $entityManager->flush();
             
-            // j'ajoute un message flash pour alerter le user
+            // j'ajoute un message pour alerter le user
             $this->addFlash(
                 'modif',
                 'Votre Profil a bien été modifié'
