@@ -1,0 +1,204 @@
+/* Modification d'une classe bootstrap pour changer le texte du bouton, utilisée dans :
+- registration
+- settings
+*/
+
+#main {
+    background-color: #e0e0e0;
+}
+
+.custom-file-label::after {
+    content: "Parcourir";
+}
+
+.centrage-profile{ /* centrer et aligner correctement la présentation du profile */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.bord-droit {
+    border-right: 1px solid #6C757D;
+}
+
+.contenuAntiDebordement{
+    word-wrap: break-word;
+}
+
+.afficher-post-entier{ /* Afficher le post entier pour le faire sortir de sous le footer */
+    margin-bottom: 70px;
+}
+
+#toggle-post{ /* Toggle pour les posts de profile */
+    display: none;
+}
+.msgIcon{
+    font-size: 2em;
+}
+
+.userSearch{
+    background-color: black;
+    border-bottom: 5px solid grey;
+    color: white;
+    
+}
+
+/* style pour barre et résultat de recherche */
+#focus{
+    width: 58%;
+    position: fixed;
+    z-index: 50;
+}
+
+/* style du header dans le chat */
+.headerChat{
+    background-color: black;
+    color: white;
+    
+}
+
+/* je redimensionne les images envoyées en message */
+.imageChat{
+    height: 200px;
+    width: 200px;
+    
+}
+
+
+/* classe pour définir la taille des images, utilisée dans :
+- conversations
+- chat
+*/
+.imageUserChat{
+    height:30px;
+    width: 30px;
+    border-radius: 20px;
+}
+
+/* définition du style des messages envoyés
+ */
+
+.msgSend{
+    background-color: #F7971B;
+    color: azure;
+    border-radius: 20px;
+}
+
+/* définition du style des messages recus */
+.msgRec{
+    background-color: black;
+    color: azure;
+    border-radius: 20px;
+}
+.contenuAntiDebordement{
+    word-wrap: break-word;
+}
+
+/* je redimensionne l'image de profil dans le header du chat */
+.imageUserHeader{
+    height:50px;
+    width: 50px;
+    border-radius: 50%;
+}
+
+/* style du chat: bordure, marge... */
+.chat{
+    border: black solid 1px;
+    margin-bottom: 55px;
+   
+}
+
+
+/* ajout de la modale de chargement scrollPost */
+.animLoad {
+    display:    none;
+    position:   fixed;
+    z-index:    1000;
+    bottom:     10vh;
+    right:      50vw;
+    height:     32px;
+    width:      32px;
+    border-radius: 30%;
+    background: rgba( 255, 255, 255, .2 ) 
+    url('../uploads/image/ajax-loader.gif') 
+    50% 50% 
+    no-repeat;
+}
+
+
+
+body.loading .animLoad {
+    overflow: hidden;   
+}
+
+
+body.loading .animLoad {
+    display: block;
+    position: fixed;
+}
+
+.signForm {
+    height : 80vh;
+}
+
+
+#searchDyn{
+    
+    width: 30%;
+    z-index: 30;
+}
+
+.maNavbar a i, .mesIconesFooter, .banner, .colorPseudo {
+    color: #f7971b;
+    
+}
+
+.custom-toggler .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(247, 151, 27)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+}
+
+
+/* agencement des contenus fixes */
+.maNavbar{
+    z-index : 100;
+    
+    
+}
+
+
+.maSidebar {
+    z-index : 9;
+    height: 100vh;
+    top : 0;
+    position: sticky;
+}
+
+
+.monFooter {
+    z-index : 100;
+    
+}
+
+@media screen and (max-width: 768px) {
+    .imageChat {
+        height: 100px;
+        width: 100px;
+    }
+
+    .maSidebar {    
+        height: 8vh;
+    }
+
+    .bord-droit {
+        border-right: none;
+        border-bottom: 1px solid #6C757D;
+        
+    }
+
+    #focus {
+        left : 30px;
+        right: 30px;
+        width: auto;
+    }
+}

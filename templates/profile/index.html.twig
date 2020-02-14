@@ -1,38 +1,122 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Profile{% endblock %}
+{% block title %}Profil{% endblock %}
 
 {% block body %}
-    <div class="container">
-        <div class="d-flex justify-content-center mb-3">
-            <h1>Profile page</h1>
-        </div>
-        
 
-        <div class="row">
+	<div class="text-center mb-3">
+		<h1 class="profileTitle">Profile page</h1>
+		{% for message in app.flashes('notice') %}
 
-            <div class="container col-4 border-right">
-                <p>{{ user.email }}<br>
-                {{ user.pseudo }}</p>
-            </div>
+			<p>{{ message }}</p> {# Affichage du message flash de suppression #}
 
-            {% if user.information is defined %}
-                <div class="container col-3 border-right">
-                   <p>{{ user.information.nom }}<br>
-                    {{ user.information.prenom }}<br>
-                    {{ user.information.dateNaissance|date("Y-m-d") }}<br>
-                    {{ user.information.adresse }}<br>
-                    {{ user.information.ville }}<br>
-                    {{ user.information.cp }}<br>
-                    {{ user.information.description }}</p>
-                </div>
-            {% endif %}
+		{% endfor %}
+	</div>
 
-            <div class="container col-4">
-                <img style="width:200px;hieght:200px;" src="{{ user.image }}" alt="Image user's">
-            </div>
-        
-        </div>
-        
-    </div>
+	<div class="container mb-4">
+
+		<div class="row">
+
+			<div class="col-md-4 col-sm-12 mb-2 centrage-profile bord-droit"> {# Affichage des informations d'inscription #}
+				<p>{{ user.email }}<br>
+			    {{ user.pseudo }}</p>{# Affichage de la possibilite d'une conversation #}
+				<a href="{{ path('chat', {'id': user.id}) }}"><i class="fas fa-comments msgIcon banner"></i></a>
+			</div>
+
+			<div class="col-md-4 col-sm-12 mb-2 centrage-profile bord-droit">{# Affichage de la photo #}
+				<img style="width:200px;height:200px;" src="{{ asset('uploads/image/' ~ user.image ) }}" alt="Image user's">
+			</div>
+
+			{% if user.information %}{# Affichage des informations complémentaires #}
+				<div class="col-md-4 col-sm-12 centrage-profile">
+					<p> <span class="font-weight-bold">Nom :</span>  {{ user.information.nom }}<br>
+						<span class="font-weight-bold">Prénom :</span>  {{ user.information.prenom }}<br>
+						<span class="font-weight-bold">Date de naissance :</span>  {{ user.information.dateNaissance|date("d-m-Y") }}<br>
+						<span class="font-weight-bold">Adresse :</span>  {{ user.information.adresse }}<br>
+						<span class="font-weight-bold">Ville :</span>  {{ user.information.ville }}<br>
+						<span class="font-weight-bold">Code Postal :</span>  {{ user.information.cp }}<br>
+					</p>
+				</div>
+			{% endif %}
+		</div>
+	</div>
+
+	<div class="col-12 text-center">
+		{% if user.information %}{# Afficher et centrer la description #}
+			<p>Description:<br>
+			<q><i> {{ user.information.description }} </i></q></p>
+		{% endif %}
+	</div>
+	
+	{% if userConnect == user %}{# empeche n'importe qui de poster à la place de l'utilisateur #}
+
+		<div class="container">{# Affichage formulaire post #}
+			<button onclick="myDisplay()" class="btn btn-warning mb-2">+</button>
+			<div id="toggle-post">
+				{{ form_start(addPost) }}
+					{{ form_row(addPost.image) }}
+					{{ form_row(addPost.contenu) }}
+				{{ form_end(addPost) }}
+			</div>
+		</div>
+
+	{% endif %}
+
+	<div class="afficher-post-entier ">
+		{% if affichagePosts %} 
+
+			{% for affichagePost in affichagePosts %}{# Boucle pour post #}
+
+				{% if affichagePost.user == user %}{# afficher les postes de l'utilisateur #}
+
+					<div class="container rounded border bg-dark text-light mb-3">
+
+						<div class="row p-3">
+							<img class="pr-2" style="width:50px;height:50px;" src="{{ asset('uploads/image/' ~ user.image ) }}" alt="Image utilisateur">
+							<p class="colorPseudo">{{ user.pseudo }}</p>
+						</div>
+
+						{% for image in affichagePost.imagePost %} {# Affichage des images #}
+
+							<img style="width:100px;height:100px;" src="{{ asset('uploads/image/' ~ image.image ) }}" alt="">
+
+						{% endfor %}
+
+						<div class="row">
+
+							<div class="container contenuAntiDebordement col-8"> {# Affichage du contenue et de la date #}
+								<p>{{ affichagePost.contenu }}</p>
+								<small>{{ affichagePost.datepost|date("d-m-Y H:i:s") }}</small>
+							</div>
+
+							{% if userConnect == user %}{# Seul l'utilisateur peut modifier son post #}
+								<div class="container col-4 d-flex flex-column justify-content-around">
+									<a class="btn btn-warning btn-block mb-1" href="{{ path('post_edit', {'id': affichagePost.id}) }}">Modification</a>
+							{% endif %}
+							{% if userConnect == user or is_granted('ROLE_ADMIN') %}{# Si l'utilisateur est le celui qui post ou si il y est admin #}
+									{% include 'profile/_delete_form.html.twig' %}{# Alors on peut supprimer #}
+								</div>
+							{% endif %}
+
+						</div>
+
+					</div>
+
+				{% endif %}
+
+			{% endfor %}
+
+		{% endif %}
+	</div>
+
+	<div class="animLoad">
+	
+	</div>
+
+	{% block additionnalJS %}{# Javascript additionnel #}
+
+		<script src="{{ asset('js/post.js') }}"></script>
+
+	{% endblock %}
+
 {% endblock %}
